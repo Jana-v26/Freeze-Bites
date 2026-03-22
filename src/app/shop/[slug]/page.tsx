@@ -331,7 +331,7 @@ export default function ProductDetailPage() {
           </h2>
           <p className="text-[#4d4732] mb-8">The product you&apos;re looking for doesn&apos;t exist.</p>
           <Link href="/shop">
-            <button className="px-8 py-3.5 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full font-semibold text-sm hover:shadow-lg hover:shadow-[#705d00]/25 transition-all">
+            <button className="btn-primary">
               Back to Shop
             </button>
           </Link>
@@ -358,7 +358,7 @@ export default function ProductDetailPage() {
     <div className="min-h-screen bg-[#fcf9f8]" style={{ fontFamily: 'Inter, sans-serif' }}>
 
       {/* ═══ BREADCRUMB ═══ */}
-      <nav className="max-w-7xl mx-auto px-6 pt-8 pb-4">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -374,7 +374,7 @@ export default function ProductDetailPage() {
       </nav>
 
       {/* ═══ PRODUCT HERO ═══ */}
-      <section className="max-w-7xl mx-auto px-6 py-6 md:py-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
 
           {/* Left: Product Image — 7 columns */}
@@ -422,8 +422,7 @@ export default function ProductDetailPage() {
             {/* Product name */}
             <h1
               className="text-4xl lg:text-5xl xl:text-7xl font-extrabold tracking-tighter text-[#1c1b1b] leading-[0.95] mb-4"
-              style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}
-            >
+                         >
               {product.name.split(' ')[0]}{' '}
               <span className="text-[#705d00] italic">
                 {product.name.split(' ').slice(1).join(' ')}
@@ -496,7 +495,7 @@ export default function ProductDetailPage() {
                 whileTap={{ scale: 0.97 }}
                 onClick={handleAddToCart}
                 disabled={isAddingToCart}
-                className="flex-1 py-4 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full font-bold text-sm tracking-wide hover:shadow-lg hover:shadow-[#705d00]/25 disabled:opacity-70 transition-all duration-200"
+                className="flex-1 btn-primary !py-4 text-sm disabled:opacity-70"
               >
                 <AnimatePresence mode="wait">
                   {isAddingToCart ? (
@@ -511,7 +510,7 @@ export default function ProductDetailPage() {
                 </AnimatePresence>
               </motion.button>
               <Link href="/checkout" className="flex-1">
-                <button className="w-full py-4 border-2 border-[#1c1b1b] text-[#1c1b1b] rounded-full font-bold text-sm tracking-wide hover:bg-[#1c1b1b] hover:text-white transition-all duration-200">
+                <button className="w-full btn-secondary !py-4 text-sm">
                   Buy Now
                 </button>
               </Link>
@@ -542,7 +541,7 @@ export default function ProductDetailPage() {
         initial={{ opacity: 0, y: 40 }}
         animate={nutritionInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="py-16 px-6"
+        className="py-16 px-4 sm:px-6 lg:px-8"
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -550,8 +549,7 @@ export default function ProductDetailPage() {
             <div className="bg-white rounded-[2rem] p-8 md:p-10 shadow-sm">
               <h2
                 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#1c1b1b] mb-2"
-                style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}
-              >
+                             >
                 Nutritional Information
               </h2>
               <p className="text-sm text-[#4d4732] mb-6">Per 50g serving</p>
@@ -576,8 +574,7 @@ export default function ProductDetailPage() {
             <div>
               <h2
                 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#1c1b1b] mb-6"
-                style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}
-              >
+                             >
                 Health Benefits
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -608,7 +605,7 @@ export default function ProductDetailPage() {
         initial={{ opacity: 0, y: 40 }}
         animate={relatedInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="py-16 pb-24 px-6"
+        className="py-16 pb-24 px-4 sm:px-6 lg:px-8"
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10">
@@ -618,8 +615,7 @@ export default function ProductDetailPage() {
               </p>
               <h2
                 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[#1c1b1b]"
-                style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}
-              >
+                             >
                 Expand Your Portfolio
               </h2>
             </div>
@@ -658,8 +654,7 @@ export default function ProductDetailPage() {
                       </p>
                       <h3
                         className="text-xl font-bold text-[#1c1b1b] mb-2"
-                        style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}
-                      >
+                                             >
                         {rp.name}
                       </h3>
                       <div className="flex items-center justify-between">

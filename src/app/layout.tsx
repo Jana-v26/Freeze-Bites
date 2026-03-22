@@ -31,11 +31,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${plusJakartaSans.variable}`}>
-      <body className="min-h-screen flex flex-col antialiased font-sans bg-[#fcf9f8]">
+      <body className="min-h-screen flex flex-col antialiased">
         <Providers>
           <PageLoader />
           <Header />
-          <main className="flex-1 pt-24">
+          <main className="flex-1 pt-24 pb-12">
             {children}
           </main>
           <Footer />

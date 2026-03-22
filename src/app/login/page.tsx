@@ -52,7 +52,7 @@ function LoginContent() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-white flex items-center justify-center px-6 py-12">
+    <div className="min-h-[calc(100vh-80px)] bg-white flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
       <div className="w-full max-w-md">
         {/* Heading */}
         <div className="text-center mb-8">
@@ -115,7 +115,7 @@ function LoginContent() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3.5 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full font-medium flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#705d00]/25 disabled:opacity-70 disabled:cursor-not-allowed transition-all"
+            className="btn-primary w-full !py-3.5 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <>

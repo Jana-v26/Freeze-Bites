@@ -98,7 +98,7 @@ export default function AboutPage() {
   return (
     <div className="bg-white">
       {/* ═══ HERO ═══ */}
-      <section className="pt-32 pb-20 px-6">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -132,7 +132,7 @@ export default function AboutPage() {
       </section>
 
       {/* ═══ OUR STORY ═══ */}
-      <AnimatedSection className="py-20 px-6">
+      <AnimatedSection className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
@@ -180,7 +180,7 @@ export default function AboutPage() {
       </AnimatedSection>
 
       {/* ═══ MISSION & VISION ═══ */}
-      <AnimatedSection className="py-20 px-6">
+      <AnimatedSection className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-sm font-medium text-[#6B7280] tracking-widest uppercase mb-3">
@@ -222,7 +222,7 @@ export default function AboutPage() {
       </AnimatedSection>
 
       {/* ═══ WHY FREEZE-DRYING? ═══ */}
-      <AnimatedSection className="py-20 px-6">
+      <AnimatedSection className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-sm font-medium text-[#6B7280] tracking-widest uppercase mb-3">
@@ -262,7 +262,7 @@ export default function AboutPage() {
       </AnimatedSection>
 
       {/* ═══ TEAM ═══ */}
-      <AnimatedSection className="py-20 px-6">
+      <AnimatedSection className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-sm font-medium text-[#6B7280] tracking-widest uppercase mb-3">
@@ -304,7 +304,7 @@ export default function AboutPage() {
       </AnimatedSection>
 
       {/* ═══ VALUES ═══ */}
-      <AnimatedSection className="py-20 px-6">
+      <AnimatedSection className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-sm font-medium text-[#6B7280] tracking-widest uppercase mb-3">
@@ -341,7 +341,7 @@ export default function AboutPage() {
       </AnimatedSection>
 
       {/* ═══ CTA ═══ */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="bg-[#1c1b1b] rounded-[2rem] p-12 md:p-16 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-display tracking-tight">
@@ -352,7 +352,7 @@ export default function AboutPage() {
               100% natural, packed with nutrients, and absolutely delicious.
             </p>
             <Link href="/shop">
-              <button className="px-10 py-4 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white font-semibold text-base rounded-full flex items-center gap-3 mx-auto hover:shadow-lg hover:shadow-[#705d00]/25 transition-all">
+              <button className="btn-primary !px-10 !py-4 text-base flex items-center gap-3 mx-auto">
                 Explore Our Products
                 <ArrowRight className="w-5 h-5" />
               </button>

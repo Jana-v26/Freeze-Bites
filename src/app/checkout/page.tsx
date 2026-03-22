@@ -280,7 +280,7 @@ export default function CheckoutPage() {
     return (
       <>
         <SuccessConfetti />
-        <div className="min-h-[80vh] flex items-center justify-center px-6 bg-white">
+        <div className="min-h-[80vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-white">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -337,12 +337,12 @@ export default function CheckoutPage() {
               className="flex flex-col sm:flex-row gap-3 justify-center"
             >
               <Link href="/account/orders">
-                <button className="px-8 py-3 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full font-semibold hover:shadow-lg hover:shadow-[#705d00]/25 transition-all">
+                <button className="btn-primary">
                   View Order
                 </button>
               </Link>
               <Link href="/shop">
-                <button className="px-8 py-3 bg-[#FAFAFA] text-[#171717] rounded-full font-semibold hover:bg-[#F3F4F6] transition-colors">
+                <button className="btn-secondary">
                   Continue Shopping
                 </button>
               </Link>
@@ -356,7 +356,7 @@ export default function CheckoutPage() {
   // ── Main Checkout ─────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -387,7 +387,7 @@ export default function CheckoutPage() {
             <h2 className="text-xl font-bold text-[#171717] mb-2">Your cart is empty</h2>
             <p className="text-[#6B7280] mb-6">Add some items to proceed with checkout</p>
             <Link href="/shop">
-              <button className="px-8 py-3 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full font-semibold hover:shadow-lg hover:shadow-[#705d00]/25 transition-all">
+              <button className="btn-primary">
                 Browse Products
               </button>
             </Link>
@@ -579,7 +579,7 @@ export default function CheckoutPage() {
                         <div className="flex gap-3 pt-2">
                           <button
                             onClick={handleSaveAddress}
-                            className="px-6 py-2.5 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-[#705d00]/25 transition-all"
+                            className="btn-primary"
                           >
                             Save Address
                           </button>
@@ -629,10 +629,10 @@ export default function CheckoutPage() {
                   />
                   <button
                     onClick={couponApplied ? () => { setCouponApplied(false); setCouponDiscount(0); setCouponCode(''); } : handleApplyCoupon}
-                    className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                    className={`${
                       couponApplied
-                        ? 'bg-red-50 text-red-600 hover:bg-red-100'
-                        : 'bg-gradient-to-r from-[#705d00] to-[#a08800] text-white hover:shadow-lg hover:shadow-[#705d00]/25'
+                        ? 'px-6 py-2.5 rounded-full text-sm font-semibold transition-all bg-red-50 text-red-600 hover:bg-red-100'
+                        : 'btn-primary'
                     }`}
                   >
                     {couponApplied ? 'Remove' : 'Apply'}
@@ -696,7 +696,7 @@ export default function CheckoutPage() {
                 <button
                   onClick={handlePlaceOrder}
                   disabled={isPlacing || !selectedAddressId}
-                  className="w-full mt-5 py-4 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full font-semibold text-base flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#705d00]/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-primary w-full mt-5 !py-4 text-base flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isPlacing ? (
                     <>

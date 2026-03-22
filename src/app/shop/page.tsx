@@ -125,7 +125,7 @@ export default function ShopPage() {
     <div className="min-h-screen bg-[#fcf9f8]" style={{ fontFamily: 'Inter, sans-serif' }}>
 
       {/* ═══ HEADER SECTION ═══ */}
-      <section className="pt-20 pb-12 px-6">
+      <section className="pt-20 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -141,8 +141,7 @@ export default function ShopPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-[#1c1b1b] leading-[0.95]"
-            style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}
-          >
+                     >
             Nature&apos;s Essence,
             <br />
             <span className="text-[#705d00]">Preserved.</span>
@@ -183,7 +182,7 @@ export default function ShopPage() {
       </section>
 
       {/* ═══ PRODUCT GRID ═══ */}
-      <section className="pb-20 px-6">
+      <section className="pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
@@ -215,7 +214,7 @@ export default function ShopPage() {
               </p>
               <button
                 onClick={() => setActiveCategory('all')}
-                className="px-6 py-3 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-[#705d00]/25 transition-all"
+                className="btn-primary"
               >
                 View All Products
               </button>
@@ -225,7 +224,7 @@ export default function ShopPage() {
       </section>
 
       {/* ═══ FUTURE HARVEST SECTION ═══ */}
-      <section className="pb-24 px-6">
+      <section className="pb-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -240,8 +239,7 @@ export default function ShopPage() {
               </p>
               <h2
                 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[#1c1b1b] mb-4"
-                style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}
-              >
+                             >
                 Expanding Our Collection
               </h2>
               <p className="text-[#4d4732] leading-relaxed">
@@ -252,7 +250,7 @@ export default function ShopPage() {
               </p>
             </div>
             <div className="flex-shrink-0">
-              <button className="inline-flex items-center gap-2 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white text-sm font-semibold px-8 py-4 rounded-full hover:shadow-lg hover:shadow-[#705d00]/25 transition-all">
+              <button className="inline-flex items-center gap-2 btn-primary !px-8 !py-4">
                 Request Notification
                 <ArrowRight className="w-4 h-4" />
               </button>

@@ -210,7 +210,7 @@ export default function HomePage() {
           HERO SECTION
          ═══════════════════════════════════════ */}
       <section className="relative min-h-[80vh] flex items-center">
-        <div className="w-full max-w-7xl mx-auto px-8 py-16 lg:py-0">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left column — text */}
             <div>
@@ -253,12 +253,12 @@ export default function HomePage() {
               >
                 <Link
                   href="/shop"
-                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#705d00] to-[#a08800] text-white font-semibold text-sm shadow-lg shadow-[#705d00]/20 hover:shadow-xl hover:shadow-[#705d00]/30 transition-all duration-300"
+                  className="btn-primary"
                 >
                   Explore Collections
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <button className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border-2 border-[#d0c6ab] text-[#705d00] font-semibold text-sm hover:border-[#705d00] transition-colors duration-300">
+                <button className="btn-secondary">
                   <Play className="w-4 h-4" />
                   Watch Process
                 </button>
@@ -306,7 +306,7 @@ export default function HomePage() {
           FREEZE-DRIED FRUITS SECTION
          ═══════════════════════════════════════ */}
       <AnimatedSection className="py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section header */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 md:mb-16">
             <div>
@@ -328,7 +328,7 @@ export default function HomePage() {
           </div>
 
           {/* Product grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {fruits.map((product, i) => (
               <ProductCard key={product.slug} product={product} index={i} />
             ))}
@@ -340,7 +340,7 @@ export default function HomePage() {
           NUTRIENT POWDERS SECTION
          ═══════════════════════════════════════ */}
       <AnimatedSection className="py-20 md:py-28 bg-[#f0eded]">
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section header */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 md:mb-16">
             <div>
@@ -362,7 +362,7 @@ export default function HomePage() {
           </div>
 
           {/* Product grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {powders.map((product, i) => (
               <ProductCard key={product.slug} product={product} index={i} />
             ))}
@@ -373,7 +373,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════
           EXPORT SERVICES SECTION
          ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-24 px-8">
+      <AnimatedSection className="py-20 md:py-28 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* LEFT — Image collage */}
           <div className="grid grid-cols-2 gap-4">
@@ -454,7 +454,7 @@ export default function HomePage() {
           TESTIMONIALS SECTION
          ═══════════════════════════════════════ */}
       <AnimatedSection className="py-20 md:py-28 bg-[#f6f3f2]">
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
             <span className="text-[#705d00] font-bold tracking-widest text-xs uppercase mb-4 block">
               Trusted Partnerships

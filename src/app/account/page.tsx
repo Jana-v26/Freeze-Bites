@@ -65,7 +65,7 @@ export default function AccountPage() {
   return (
     <div className="min-h-[calc(100vh-80px)] bg-white">
       {/* Header */}
-      <div className="max-w-3xl mx-auto px-6 pt-12 pb-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-[#171717]">My Account</h1>
@@ -107,7 +107,7 @@ export default function AccountPage() {
       </div>
 
       {/* Tab content */}
-      <div className="max-w-3xl mx-auto px-6 pb-12">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <AnimatePresence mode="wait">
           {activeTab === 'profile' && <ProfileTab key="profile" user={user} />}
           {activeTab === 'orders' && <OrdersTab key="orders" />}
@@ -226,7 +226,7 @@ function ProfileTab({ user }: { user: { id: number; name: string; email: string;
               <button
                 type="submit"
                 disabled={isSaving}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full font-medium text-sm disabled:opacity-70"
+                className="btn-primary flex items-center gap-2 disabled:opacity-70"
               >
                 {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                 {isSaving ? 'Saving...' : 'Save Changes'}
@@ -290,7 +290,7 @@ function OrdersTab() {
           <p className="text-[#6B7280] mb-6">Start shopping to see your orders here!</p>
           <a
             href="/shop"
-            className="inline-flex px-6 py-2.5 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full font-medium text-sm"
+            className="btn-primary inline-flex"
           >
             Browse Products
           </a>
@@ -453,7 +453,7 @@ function AddressesTab() {
       <div className="flex justify-end">
         <button
           onClick={() => setShowForm(!showForm)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full text-sm font-medium"
+          className="btn-primary flex items-center gap-2"
         >
           {showForm ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
           {showForm ? 'Cancel' : 'Add New Address'}
@@ -547,7 +547,7 @@ function AddressesTab() {
               <button
                 type="submit"
                 disabled={saving}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full font-medium text-sm disabled:opacity-70 mt-2"
+                className="btn-primary flex items-center gap-2 disabled:opacity-70 mt-2"
               >
                 {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
                 {saving ? 'Adding...' : 'Add Address'}

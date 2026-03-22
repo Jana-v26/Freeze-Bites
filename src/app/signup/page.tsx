@@ -58,7 +58,7 @@ export default function SignupPage() {
     'w-full pl-12 pr-12 py-3.5 bg-white rounded-lg border border-[#E5E7EB] focus:border-[#705d00] focus:ring-1 focus:ring-[#705d00] outline-none transition-all text-[#171717] placeholder:text-[#6B7280]';
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-white flex items-center justify-center px-6 py-12">
+    <div className="min-h-[calc(100vh-80px)] bg-white flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
       <div className="w-full max-w-md">
         {/* Heading */}
         <div className="text-center mb-8">
@@ -162,7 +162,7 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3.5 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full font-medium flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#705d00]/25 disabled:opacity-70 disabled:cursor-not-allowed transition-all mt-2"
+            className="btn-primary w-full !py-3.5 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed mt-2"
           >
             {isLoading ? (
               <>

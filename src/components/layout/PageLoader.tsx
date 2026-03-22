@@ -36,7 +36,7 @@ export default function PageLoader() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05, duration: 0.4 }}
-            className="font-['Plus_Jakarta_Sans'] text-5xl font-extrabold tracking-tighter text-[#1c1b1b] mb-4"
+            className="font-display text-5xl font-extrabold tracking-tighter text-[#1c1b1b] mb-4"
           >
             FreezeDance
           </motion.h1>

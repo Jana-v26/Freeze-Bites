@@ -12,8 +12,10 @@
   --color-muted: #4d4732;
   --color-border: #d0c6ab;
   --color-card: #ffffff;
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* FIXED: Properly connecting Next.js font variables */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-plus-jakarta-sans), system-ui, sans-serif;
 }
 
 * {
@@ -28,13 +30,18 @@ html {
 }
 
 body {
-  background: #fcf9f8;
-  color: #1c1b1b;
+  background: var(--color-background);
+  color: var(--color-foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
+}
+
+/* Let headers strictly use Plus Jakarta Sans */
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display);
 }
 
 /* ========================================
@@ -154,56 +161,62 @@ body {
 }
 
 /* ========================================
-   Buttons
+   Standardized Buttons (Matches Figma)
+   Using !important to override Tailwind resets
    ======================================== */
 .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
-  background: #705d00;
-  color: #FFFFFF;
-  font-weight: 500;
-  font-size: 0.9rem;
-  letter-spacing: 0.01em;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  padding: 0.875rem 2rem !important;
+  background: var(--color-primary) !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  font-family: var(--font-display) !important;
+  border-radius: 9999px !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 14px rgba(112, 93, 0, 0.15) !important;
+  text-decoration: none !important;
 }
 
 .btn-primary:hover {
-  background: #544600;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(112, 93, 0, 0.25) !important;
+  background: #544600 !important;
 }
 
 .btn-primary:active {
-  transform: translateY(0);
+  transform: translateY(0) !important;
 }
 
 .btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
-  background: #FFFFFF;
-  color: #1c1b1b;
-  font-weight: 500;
-  font-size: 0.9rem;
-  letter-spacing: 0.01em;
-  border: 1px solid #E5E7EB;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  padding: 0.875rem 2rem !important;
+  background: #FFFFFF !important;
+  color: var(--color-foreground) !important;
+  font-weight: 600 !important;
+  font-family: var(--font-display) !important;
+  border: 1px solid #d0c6ab !important;
+  border-radius: 9999px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
 }
 
 .btn-secondary:hover {
-  background: #f6f3f2;
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  background: #fcf9f8 !important;
 }
 
 .btn-secondary:active {
-  transform: translateY(0);
+  transform: translateY(0) !important;
 }
 
 /* ========================================

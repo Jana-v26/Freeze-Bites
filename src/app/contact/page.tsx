@@ -148,7 +148,7 @@ export default function ContactPage() {
   return (
     <div className="bg-white">
       {/* ═══ HERO ═══ */}
-      <section className="pt-32 pb-20 px-6">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -181,7 +181,7 @@ export default function ContactPage() {
       </section>
 
       {/* ═══ CONTACT INFO CARDS ═══ */}
-      <AnimatedSection className="pb-16 px-6">
+      <AnimatedSection className="pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {contactInfo.map((info, i) => (
             <motion.div
@@ -204,7 +204,7 @@ export default function ContactPage() {
       </AnimatedSection>
 
       {/* ═══ CONTACT FORM + MAP ═══ */}
-      <AnimatedSection className="py-20 px-6">
+      <AnimatedSection className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Form */}
           <div>
@@ -285,7 +285,7 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                className="w-full py-3.5 bg-gradient-to-r from-[#705d00] to-[#a08800] text-white rounded-full font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#705d00]/25 transition-all"
+                className="btn-primary w-full !py-3.5 flex items-center justify-center gap-2"
               >
                 <Send className="w-4 h-4" />
                 Send Message
@@ -333,7 +333,7 @@ export default function ContactPage() {
       </AnimatedSection>
 
       {/* ═══ FAQ SECTION ═══ */}
-      <AnimatedSection className="py-20 px-6">
+      <AnimatedSection className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-sm font-medium text-[#6B7280] tracking-widest uppercase mb-3">

@@ -24,10 +24,10 @@ export default function Header() {
     <>
       {/* Glass blur fixed nav */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#fcf9f8]/70 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <span className="font-['Plus_Jakarta_Sans'] text-2xl font-bold tracking-tighter text-[#1c1b1b]">
+            <span className="text-2xl font-bold tracking-tighter text-[#1c1b1b]">
               FreezeDance
             </span>
           </Link>
@@ -38,7 +38,7 @@ export default function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="font-['Plus_Jakarta_Sans'] text-sm font-medium text-[#1c1b1b] opacity-80 hover:opacity-100 hover:text-[#705d00] transition-all"
+                className="text-sm font-medium text-[#1c1b1b] opacity-80 hover:opacity-100 hover:text-[#705d00] transition-all"
               >
                 {link.name}
               </Link>
@@ -77,7 +77,7 @@ export default function Header() {
             {/* Golden gradient Order Now button */}
             <Link
               href="/shop"
-              className="hidden md:inline-flex bg-gradient-to-br from-[#705d00] to-[#ffd700] text-white px-6 py-2.5 rounded-full font-semibold text-sm font-['Plus_Jakarta_Sans'] hover:shadow-lg hover:shadow-[#ffd700]/25 transition-shadow"
+              className="hidden md:inline-flex btn-primary !py-2.5 !px-6 text-sm"
             >
               Order Now
             </Link>
@@ -119,7 +119,7 @@ export default function Header() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-4 font-['Plus_Jakarta_Sans'] text-base font-medium text-[#1c1b1b] border-b border-[#1c1b1b]/10"
+                    className="block py-4 text-base font-medium text-[#1c1b1b] border-b border-[#1c1b1b]/10"
                   >
                     {link.name}
                   </Link>
@@ -130,14 +130,14 @@ export default function Header() {
               <Link
                 href={isAuthenticated ? '/account' : '/login'}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-3 text-center font-['Plus_Jakarta_Sans'] text-sm font-medium text-[#1c1b1b] border border-[#1c1b1b]/20 rounded-full"
+                className="btn-secondary w-full text-center"
               >
                 {isAuthenticated ? 'My Account' : 'Sign In'}
               </Link>
               <Link
                 href="/shop"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-3 bg-gradient-to-br from-[#705d00] to-[#ffd700] text-white rounded-full text-center text-sm font-semibold font-['Plus_Jakarta_Sans']"
+                className="btn-primary w-full text-center"
               >
                 Order Now
               </Link>
