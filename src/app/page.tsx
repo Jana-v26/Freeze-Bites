@@ -209,7 +209,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════
           HERO SECTION
          ═══════════════════════════════════════ */}
-      <section className="relative min-h-[80vh] flex items-center">
+      <section className="relative min-h-[calc(100vh-6rem)] flex items-center w-full">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left column — text */}

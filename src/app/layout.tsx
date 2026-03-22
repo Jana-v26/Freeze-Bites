@@ -30,12 +30,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${plusJakartaSans.variable}`}>
-      <body className="min-h-screen flex flex-col antialiased">
+    <html lang="en" className={`h-full ${inter.variable} ${plusJakartaSans.variable}`}>
+      <body className="h-full w-full flex flex-col antialiased font-sans bg-[var(--color-background)]">
         <Providers>
           <PageLoader />
           <Header />
-          <main className="flex-1 pt-24 pb-12">
+          <main className="flex-1 w-full pt-24 flex flex-col">
             {children}
           </main>
           <Footer />

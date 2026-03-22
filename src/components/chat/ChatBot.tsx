@@ -150,7 +150,7 @@ export default function ChatBot() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#171717] text-white rounded-full shadow-lg flex items-center justify-center"
+            className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#705d00] text-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#544600] transition-colors"
           >
             <MessageCircle className="w-6 h-6" />
           </motion.button>
