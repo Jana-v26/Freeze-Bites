@@ -305,8 +305,8 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════
           FREEZE-DRIED FRUITS SECTION
          ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <AnimatedSection className="py-16 md:py-24 w-full">
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
           {/* Section header */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 md:mb-16">
             <div>
@@ -339,8 +339,8 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════
           NUTRIENT POWDERS SECTION
          ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-20 md:py-28 bg-[#f0eded]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <AnimatedSection className="py-16 md:py-24 w-full bg-[#f0eded]">
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
           {/* Section header */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 md:mb-16">
             <div>
@@ -373,31 +373,31 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════
           EXPORT SERVICES SECTION
          ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-20 md:py-28 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <AnimatedSection className="py-16 md:py-24 w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           {/* LEFT — Image collage */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-4">
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwtUrjiqorB4zvGXqaFjkELpsgS0wn94pn8sMp3_3fJbvol667tRq7T_2QzkiARPS1kY92U6IGbIzR3oIXIPn3rLcuj6IH2lslae4zi1JWHac7gsDe2YhrUkoGCtP5HFPS2_gsPmLMjBf6v5DiYN_g2qjPvVac0NzmcnJCd1LLvr_gPKjOK-A77RsmioueJomAJHn8-heSEqn13h1nRl94rSqBEqVV5paP182mtKxtfvOU3axtjDnShFKCKCrbRxb76F9p2JEMGnAf"
-                alt="Logistics"
+                src="https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&q=80"
+                alt="Cargo container ship for international fruit export"
                 className="w-full h-64 object-cover rounded-3xl"
               />
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC340Bmsuq3oc1tESbi4oOlA4KVCtkM1IfE6s-nMzACiFZnUn2ohw9yueshqtojgXOPQXglKOLgQsOG8u46D1fhZB5dOHya7PMgorhBpwQ_gaGHE8boWOpwBXBKy526myhl82HwPDhZf5gJVggMDTwTWQ7T1WycbTLh4gBhODDVe3nHZCqxmCOA7KM2zdho942LTVp0OnOMC8fw-KFXVmq9lPweCWeHzjCra82nvL0N7KoPbJlxkk_iOWklyGHv3Vdrta48IwbaK0TV"
-                alt="Quality Control"
+                src="https://images.unsplash.com/photo-1578307986144-d248cb7434db?w=800&q=80"
+                alt="Food quality control laboratory testing"
                 className="w-full h-80 object-cover rounded-3xl"
               />
             </div>
             <div className="space-y-4 pt-12">
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7JLltC_Xco7pBnrtbV9K6SIlb1hEwpDuEx0ovRyMOyz3a5I-MhALrLvfl7aSGp5Mk1ryZOFs0PADA5ZjUc6t6d3hafjiuSooYWyMKcCe4qZa8mQX7WejIoteezLfsshvsC3l4jNwtR-dzXd8lq1xe5GAehcZVLG0m3TcbTZaH6linMQn_8Nvgu5h920VPrAhfTBJFVmXfPgtbu9YfF4SJA7eRpEKsU02LX_BwKP__7mKVASm0flOVY_IuWWb1YcEQrFgJQJdg6LYx"
-                alt="Shipping"
+                src="https://images.unsplash.com/photo-1651525670033-279c26cc2347?w=800&q=80"
+                alt="Bulk packaging boxes ready for export shipment"
                 className="w-full h-80 object-cover rounded-3xl"
               />
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2_8Gu7e4unSgNFdPOTjl_oI7E43uq2qPnT3uEmBFC-dd8Wvl4c1mj0I-oQSnkQs0D1vHQ-SZGfcENJD91Q2CQQ_6S-fdsTGU9FjpIX5Z3pfKI745K0LJsPQwsb222lWq5KXPudGpAdQM0_DzQYb9r5EXTIXeySr0sx5ltU7JQYGkLCFOFOrR2-TsSuxk9c7RyCQYK-32WWQNFNDMVC-EMFV6lG2aGWmXViRarXevQAkHAlpYImpAhgn9_slUmy47n5FwUWrir3dfm"
-                alt="Packaging"
+                src="https://images.unsplash.com/photo-1703194531119-e8b98a555cb6?w=800&q=80"
+                alt="Aerial view of container port global trade hub"
                 className="w-full h-64 object-cover rounded-3xl"
               />
             </div>
@@ -453,7 +453,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════
           TESTIMONIALS SECTION
          ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-20 md:py-28 bg-[#f6f3f2]">
+      <AnimatedSection className="py-16 md:py-24 w-full bg-[#f6f3f2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
             <span className="text-[#705d00] font-bold tracking-widest text-xs uppercase mb-4 block">

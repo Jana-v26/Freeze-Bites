@@ -18,9 +18,9 @@
   --font-display: var(--font-plus-jakarta-sans), system-ui, sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -161,61 +161,60 @@ h1, h2, h3, h4, h5, h6, .font-display {
 
 /* ========================================
    Standardized Buttons (Matches Figma)
-   Using !important to override Tailwind resets
    ======================================== */
 .btn-primary {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 0.5rem !important;
-  padding: 0.875rem 2rem !important;
-  background: var(--color-primary) !important;
-  color: #FFFFFF !important;
-  font-weight: 600 !important;
-  font-family: var(--font-display) !important;
-  border-radius: 9999px !important;
-  border: none !important;
-  cursor: pointer !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  box-shadow: 0 4px 14px rgba(112, 93, 0, 0.15) !important;
-  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-family: var(--font-display);
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(112, 93, 0, 0.15);
+  text-decoration: none;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(112, 93, 0, 0.25) !important;
-  background: #544600 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(112, 93, 0, 0.25);
+  background: #544600;
 }
 
 .btn-primary:active {
-  transform: translateY(0) !important;
+  transform: translateY(0);
 }
 
 .btn-secondary {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 0.5rem !important;
-  padding: 0.875rem 2rem !important;
-  background: #FFFFFF !important;
-  color: var(--color-foreground) !important;
-  font-weight: 600 !important;
-  font-family: var(--font-display) !important;
-  border: 1px solid #d0c6ab !important;
-  border-radius: 9999px !important;
-  cursor: pointer !important;
-  transition: all 0.3s ease !important;
-  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: #FFFFFF;
+  color: var(--color-foreground);
+  font-weight: 600;
+  font-family: var(--font-display);
+  border: 1px solid #d0c6ab;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .btn-secondary:hover {
-  border-color: var(--color-primary) !important;
-  color: var(--color-primary) !important;
-  background: #fcf9f8 !important;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: #fcf9f8;
 }
 
 .btn-secondary:active {
-  transform: translateY(0) !important;
+  transform: translateY(0);
 }
 
 /* ========================================
