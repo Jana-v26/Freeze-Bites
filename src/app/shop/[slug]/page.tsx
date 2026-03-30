@@ -13,15 +13,15 @@ import { useCartStore } from '@/store/cartStore';
 
 // ─── Product image URLs ────────────────────────────────────────
 const productImageURLs: Record<string, string> = {
-  'mango-cubes': 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6ptDAgiZ2TncDFfKB3taATRb6bWEo8ot09-GA3n6ogLLy2awGBUv6leLjKMHM2vRz3jv5h_wBNzlGRginrg90tFwTrdZ4vVhof6e9byQYoBVBTuXfSQQH6eeUDUQ6B_Kw2VF4RMlevfdRDGKoOwrfOR2WhV4M0_1NaRMsxHBOgrLMjjYRug_QDYavSkiEdE8NwuFBUjiPVbs4WP9Gsam1pwKspt4uGMQwgFfZadl12RdD0cPJmt4Pk4lUgFR9u4sxlf1U7b-v7eMP',
-  'pineapple-cubes': 'https://lh3.googleusercontent.com/aida-public/AB6AXuB2JS6aMBndIx4DlVEJW0ANAX_XnLIK_rkhnOFjTOzgE9hZjeKI9E6saMQDBaCWTuRTPgm51QOA8mnL170vAZFMO8-GOrNiGtBWLowLHQBOsG1CWUc9_s9tvqo4K-afGrUlpJ-0VWv1UGcC0-LDsm0lvUEK4KQTtRDmGFGcWf_FmdfHBkHqUN48NpiuNsXdNtTO7EDqVtgWTRh0NB_IvwQ-D_UYB1cswqIVMTOX0BSZs64bY3VdJwrHkIxcwAND4M-pV7nob-k9xf3l',
-  'jamun-cubes': 'https://lh3.googleusercontent.com/aida-public/AB6AXuBv1D9Ulrmt6M5GvNN_fko0dUtrPS-AroXAlpOthD1kgOzJL4ULEL4QsqdLaEkH4OAojxi_RmH0XGb_7mZnt8GbPyyNDB91DDmF-4ijIfIbCXsnfDt96z_r2Hx78fl6CRBgL9zNfJQIPCy3aR4Jz-lUncyATk_Kbi7CZ3DsCSEV7tux5TujTSFWAjuAl-1x4YTgJcxvMedSJSYEco1Tbw6ATX7UKJ0oe1ecnXajerhcW3TOP6kFXlfSxFiZ0Egd2onHkF6CizZdFB35',
-  'banana-cubes': 'https://lh3.googleusercontent.com/aida-public/AB6AXuDLCbvewiOLXx3Uirr9T644W9J9dxRkNNNWJbUmLsIubZnQ1nNmdPv9UxHkSbQRmHHXqGolxCeKp6NK89StClWfzikN_rx2U7WFrB12R8tFtAYMnv68bXa1mtxnt9edU4nklZmf-GSlonZwu6h0gaTuRq5Zfq6NqdiWu_3BBtQTfVcie6znhgrYBAWrGZgys4vm2nnAr735sgXu7xdXmN81q49Q63kEXQel_Zu63QoVEf6WfyQgMq6OO5A_yh-BsDRrZYP8-a7GLBJa',
+  'mango-cubes': '/images/products/mango-cubes.png',
+  'pineapple-cubes': '/images/products/pineapple-cubes.png',
+  'jamun-cubes': '/images/products/jamun-cubes.png',
+  'banana-cubes': '/images/products/banana-cubes.png',
   'jackfruit-cubes': 'https://lh3.googleusercontent.com/aida-public/AB6AXuBd2N03cVfTXlcXqr0JmY-7d7bw5jmBa8QQ2mh05OnzUmuVdD6hS1BXICKHJjZzIOn-6ri-z57Kh6o4I_t8D2ImSClZLk9iAuje3IsvLEfd3ZzbgYR0epblA2Y07omTH55rB6d84p1PsTydtdbBe1OI8HoF1wgIcRRhTtGzfS2ucJzbxboZBv0hJDSEW69-OFvfrhgS1Kx4Z-729Ibw4-0zXJZoe99R7_2qxveEJIiixc3K4TFHIVlqI4pJ7fdGPXk6HQGp-uGQkUmM',
   'jamun-powder': 'https://lh3.googleusercontent.com/aida-public/AB6AXuBv1D9Ulrmt6M5GvNN_fko0dUtrPS-AroXAlpOthD1kgOzJL4ULEL4QsqdLaEkH4OAojxi_RmH0XGb_7mZnt8GbPyyNDB91DDmF-4ijIfIbCXsnfDt96z_r2Hx78fl6CRBgL9zNfJQIPCy3aR4Jz-lUncyATk_Kbi7CZ3DsCSEV7tux5TujTSFWAjuAl-1x4YTgJcxvMedSJSYEco1Tbw6ATX7UKJ0oe1ecnXajerhcW3TOP6kFXlfSxFiZ0Egd2onHkF6CizZdFB35',
   'mango-powder': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCmnILGSlVSSNZzJLrKf7WAygot5YtJJFwKhQ7Sa2Net_U8ICKmtVUpWHkmQA3M5oKdchZrV_GcmJp-F1ipnoksXyNsyhnEvy86vFg5VnAOi1Z46Tk55EVeAhgC9Fz2WYIJ1K37Gy17RXpstKLqr-hugRw0YJD3WaghGcogZZ6YfjAZreUqVkeGVjAFhJNMag-GHTZHOATC8HNYGH-nkIpTbdOZ3LeqsmW5NLHdJ9qaSF5cgyZHbdFoVK7Mn7olBKF6oosY6lxVvSze',
-  'pineapple-powder': 'https://lh3.googleusercontent.com/aida-public/AB6AXuADhT9tG-b1W38WTIRiluLTD6yC_bWeTfMEmt5f1smzpWGpKda3fXbiikAS-5qS8HJwloXvJWJ8nIkgqlEeP07kwmIXEC-3svJgOYQU8VkIp_K9_tzUs5NvM6EVq59JewZhUREHrQ6cU3deP7jSOsk9tAt5STzYi85buFRkNRPa6Z7TGBSAjFTSes0rS4ncJeo8c_LkwnZZ5X8HPPJW7VglCWtqvweqQjXIN-2WBXZH3jx6R_3iyMA7kO59Hz4ODaXpsCu1mz8-mQdi',
-  'moringa-powder': 'https://lh3.googleusercontent.com/aida-public/AB6AXuDDK3gCqItkeCFUYonSx_Q4I6jTu6e1UdK3N4uDj4_zSzVG9qtAg-m_l9MZTgpCUf7ejOqT7Axs6UwwDXfy2qWZV01UljUI6yFWNiXJKrJEpeqfqOldv7Y01-cWXIfdjn9orEacN_tQcRLskQg0vKSfBDaNta_oIChiH-esQ1zHdS8vuI7RMk0VgsNO_xNf3-XBmVmtP2B5pE8lymWPGMp5n6cwg1BeWvV7ZBgnwe-VnvxC2IVZQaFj_bziV2LExv1A-CfoptTcCZwx',
+  'pineapple-powder': '/images/products/pineapple-powder.png',
+  'moringa-powder': '/images/products/moringa-powder.png',
 };
 
 // ─── Icon type ─────────────────────────────────────────────────
@@ -270,7 +270,7 @@ const productsData: Record<string, ProductData> = {
   'moringa-powder': {
     id: 9, name: 'Moringa Powder', slug: 'moringa-powder', price: 399,
     category: 'Superfood Powder', categorySlug: 'powders', format: 'Powder',
-    bgTint: 'bg-[#f0f9f0]',
+    bgTint: 'bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20',
     description: 'Premium freeze-dried moringa leaf powder, often called the "miracle tree" superfood. Loaded with vitamins, minerals, and amino acids, moringa is one of the most nutrient-dense foods on the planet.',
     benefits: [
       { icon: Zap, title: '7x Vitamin C', desc: 'Seven times more vitamin C than oranges' },
@@ -320,16 +320,16 @@ export default function ProductDetailPage() {
 
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#fcf9f8]" style={{ fontFamily: 'Inter, sans-serif' }}>
+      <div className="min-h-screen flex items-center justify-center bg-[var(--color-background)]" style={{ fontFamily: 'Inter, sans-serif' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center"
         >
-          <h2 className="text-3xl font-extrabold text-[#1c1b1b] mb-3" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+          <h2 className="text-3xl font-extrabold text-[var(--color-foreground)] mb-3" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
             Product Not Found
           </h2>
-          <p className="text-[#4d4732] mb-8">The product you&apos;re looking for doesn&apos;t exist.</p>
+          <p className="text-[var(--color-on-surface-variant)] mb-8">The product you&apos;re looking for doesn&apos;t exist.</p>
           <Link href="/shop">
             <button className="btn-primary">
               Back to Shop
@@ -355,7 +355,7 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fcf9f8]" style={{ fontFamily: 'Inter, sans-serif' }}>
+    <div className="min-h-screen bg-[var(--color-background)]" style={{ fontFamily: 'Inter, sans-serif' }}>
 
       {/* ═══ BREADCRUMB ═══ */}
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
@@ -363,13 +363,13 @@ export default function ProductDetailPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
-          className="flex items-center gap-2 text-sm text-[#4d4732]"
+          className="flex items-center gap-2 text-sm text-[var(--color-on-surface-variant)]"
         >
-          <Link href="/" className="hover:text-[#705d00] transition-colors">Home</Link>
+          <Link href="/" className="hover:text-[var(--color-secondary)] transition-colors">Home</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link href="/shop" className="hover:text-[#705d00] transition-colors">Products</Link>
+          <Link href="/shop" className="hover:text-[var(--color-secondary)] transition-colors">Products</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-[#1c1b1b] font-medium">{product.name}</span>
+          <span className="text-[var(--color-foreground)] font-medium">{product.name}</span>
         </motion.div>
       </nav>
 
@@ -396,12 +396,12 @@ export default function ProductDetailPage() {
               />
 
               {/* Format badge — top right */}
-              <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm text-[#1c1b1b] text-xs font-semibold px-4 py-2 rounded-full shadow-sm">
+              <div className="absolute top-6 right-6 luxe-glass backdrop-blur-sm text-[var(--color-foreground)] text-xs font-semibold px-4 py-2 rounded-full shadow-sm">
                 {product.format}
               </div>
 
               {/* Export Grade badge — bottom left */}
-              <div className="absolute bottom-6 left-6 bg-[#166534] text-white text-xs font-semibold px-4 py-2 rounded-full shadow-sm">
+              <div className="absolute bottom-6 left-6 bg-[var(--color-primary)] text-[#064e3b] text-white text-xs font-semibold px-4 py-2 rounded-full shadow-sm">
                 Export Grade
               </div>
             </div>
@@ -415,28 +415,28 @@ export default function ProductDetailPage() {
             className="lg:col-span-5 flex flex-col justify-center"
           >
             {/* 100% Natural badge */}
-            <span className="inline-flex items-center self-start bg-[#f0f9f0] text-[#166534] text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
+            <span className="inline-flex items-center self-start bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 text-[var(--color-primary)] text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
               100% NATURAL
             </span>
 
             {/* Product name */}
             <h1
-              className="text-4xl lg:text-5xl xl:text-7xl font-extrabold tracking-tighter text-[#1c1b1b] leading-[0.95] mb-4"
+              className="text-4xl lg:text-5xl xl:text-7xl font-extrabold tracking-tighter text-[var(--color-foreground)] leading-[0.95] mb-4"
                          >
               {product.name.split(' ')[0]}{' '}
-              <span className="text-[#705d00] italic">
+              <span className="text-[var(--color-secondary)] italic">
                 {product.name.split(' ').slice(1).join(' ')}
               </span>
             </h1>
 
             {/* Description */}
-            <p className="text-[#4d4732] leading-relaxed text-[15px] mb-6">
+            <p className="text-[var(--color-on-surface-variant)] leading-relaxed text-[15px] mb-6">
               {product.description}
             </p>
 
             {/* Size Selector */}
             <div className="mb-5">
-              <h3 className="text-xs font-semibold text-[#4d4732] uppercase tracking-wide mb-3">Select Size</h3>
+              <h3 className="text-xs font-semibold text-[var(--color-on-surface-variant)] uppercase tracking-wide mb-3">Select Size</h3>
               <div className="flex gap-2.5">
                 {product.variants.map((variant, i) => (
                   <button
@@ -444,8 +444,8 @@ export default function ProductDetailPage() {
                     onClick={() => { setSelectedVariant(i); setQuantity(1); }}
                     className={`px-5 py-2.5 rounded-full text-sm font-medium border transition-all duration-200 ${
                       selectedVariant === i
-                        ? 'bg-[#705d00] text-white border-[#705d00]'
-                        : 'bg-white text-[#1c1b1b] border-[#e5e1d8] hover:border-[#705d00]/40'
+                        ? 'bg-[var(--color-secondary)] text-white border-[var(--color-secondary)]'
+                        : 'luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)] text-[var(--color-foreground)] border-[var(--color-outline-variant)] hover:border-[var(--color-secondary)]/40'
                     }`}
                   >
                     {variant.weight}
@@ -459,18 +459,18 @@ export default function ProductDetailPage() {
 
             {/* Quantity Selector */}
             <div className="mb-6">
-              <h3 className="text-xs font-semibold text-[#4d4732] uppercase tracking-wide mb-3">Quantity</h3>
-              <div className="inline-flex items-center bg-white border border-[#e5e1d8] rounded-full">
+              <h3 className="text-xs font-semibold text-[var(--color-on-surface-variant)] uppercase tracking-wide mb-3">Quantity</h3>
+              <div className="inline-flex items-center luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)] border border-[var(--color-outline-variant)] rounded-full">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 flex items-center justify-center text-[#4d4732] hover:text-[#1c1b1b] transition-colors"
+                  className="w-10 h-10 flex items-center justify-center text-[var(--color-on-surface-variant)] hover:text-[var(--color-foreground)] transition-colors"
                 >
                   <Minus className="w-4 h-4" />
                 </button>
-                <span className="w-10 text-center font-semibold text-sm text-[#1c1b1b]">{quantity}</span>
+                <span className="w-10 text-center font-semibold text-sm text-[var(--color-foreground)]">{quantity}</span>
                 <button
                   onClick={() => setQuantity(Math.min(10, quantity + 1))}
-                  className="w-10 h-10 flex items-center justify-center text-[#4d4732] hover:text-[#1c1b1b] transition-colors"
+                  className="w-10 h-10 flex items-center justify-center text-[var(--color-on-surface-variant)] hover:text-[var(--color-foreground)] transition-colors"
                 >
                   <Plus className="w-4 h-4" />
                 </button>
@@ -479,11 +479,11 @@ export default function ProductDetailPage() {
 
             {/* Price display */}
             <div className="flex items-baseline gap-3 mb-6">
-              <span className="text-3xl font-extrabold text-[#705d00]" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
+              <span className="text-3xl font-extrabold text-[var(--color-secondary)]" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
                 {'\u20B9'}{currentVariant.price * quantity}
               </span>
               {currentVariant.compareAtPrice && (
-                <span className="text-lg text-[#9c9688] line-through">
+                <span className="text-lg text-[var(--color-on-surface-variant)] opacity-50 line-through">
                   {'\u20B9'}{currentVariant.compareAtPrice * quantity}
                 </span>
               )}
@@ -518,17 +518,17 @@ export default function ProductDetailPage() {
 
             {/* Specs Row: 3 columns */}
             <div className="grid grid-cols-3 gap-4">
-              <div className="bg-[#f6f3f2] rounded-2xl p-4 text-center">
-                <p className="text-xs text-[#4d4732] font-medium mb-1">Weight</p>
-                <p className="text-sm font-bold text-[#1c1b1b]">{currentVariant.weight}</p>
+              <div className="luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)]/5 border border-white/10 rounded-2xl p-4 text-center">
+                <p className="text-xs text-[var(--color-on-surface-variant)] font-medium mb-1">Weight</p>
+                <p className="text-sm font-bold text-[var(--color-foreground)]">{currentVariant.weight}</p>
               </div>
-              <div className="bg-[#f6f3f2] rounded-2xl p-4 text-center">
-                <p className="text-xs text-[#4d4732] font-medium mb-1">Shelf Life</p>
-                <p className="text-sm font-bold text-[#1c1b1b]">{product.specs.shelfLife}</p>
+              <div className="luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)]/5 border border-white/10 rounded-2xl p-4 text-center">
+                <p className="text-xs text-[var(--color-on-surface-variant)] font-medium mb-1">Shelf Life</p>
+                <p className="text-sm font-bold text-[var(--color-foreground)]">{product.specs.shelfLife}</p>
               </div>
-              <div className="bg-[#f6f3f2] rounded-2xl p-4 text-center">
-                <p className="text-xs text-[#4d4732] font-medium mb-1">Certified</p>
-                <p className="text-sm font-bold text-[#1c1b1b]">FSSAI</p>
+              <div className="luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)]/5 border border-white/10 rounded-2xl p-4 text-center">
+                <p className="text-xs text-[var(--color-on-surface-variant)] font-medium mb-1">Certified</p>
+                <p className="text-sm font-bold text-[var(--color-foreground)]">FSSAI</p>
               </div>
             </div>
           </motion.div>
@@ -546,15 +546,15 @@ export default function ProductDetailPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {/* Nutrition table */}
-            <div className="bg-white rounded-[2rem] p-8 md:p-10 shadow-sm">
+            <div className="luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)] rounded-[2rem] p-8 md:p-10 shadow-sm">
               <h2
-                className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#1c1b1b] mb-2"
+                className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--color-foreground)] mb-2"
                              >
                 Nutritional Information
               </h2>
-              <p className="text-sm text-[#4d4732] mb-6">Per 50g serving</p>
+              <p className="text-sm text-[var(--color-on-surface-variant)] mb-6">Per 50g serving</p>
 
-              <div className="divide-y divide-[#f0ede8]">
+              <div className="divide-y divide-[var(--color-outline-variant)]">
                 {product.nutrition.map((row, i) => (
                   <motion.div
                     key={row.label}
@@ -563,8 +563,8 @@ export default function ProductDetailPage() {
                     transition={{ duration: 0.4, delay: i * 0.06 }}
                     className="flex items-center justify-between py-3.5"
                   >
-                    <span className="text-sm text-[#4d4732]">{row.label}</span>
-                    <span className="text-sm font-semibold text-[#1c1b1b]">{row.value}</span>
+                    <span className="text-sm text-[var(--color-on-surface-variant)]">{row.label}</span>
+                    <span className="text-sm font-semibold text-[var(--color-foreground)]">{row.value}</span>
                   </motion.div>
                 ))}
               </div>
@@ -573,7 +573,7 @@ export default function ProductDetailPage() {
             {/* Health benefits grid */}
             <div>
               <h2
-                className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#1c1b1b] mb-6"
+                className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--color-foreground)] mb-6"
                              >
                 Health Benefits
               </h2>
@@ -584,13 +584,13 @@ export default function ProductDetailPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={nutritionInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow duration-300"
+                    className="luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)] rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow duration-300"
                   >
-                    <div className="w-10 h-10 bg-[#ffd700]/20 rounded-xl flex items-center justify-center mb-3">
-                      <benefit.icon className="w-5 h-5 text-[#705d00]" />
+                    <div className="w-10 h-10 bg-[var(--color-secondary)]/10 border border-[var(--color-secondary)]/20 rounded-xl flex items-center justify-center mb-3">
+                      <benefit.icon className="w-5 h-5 text-[var(--color-secondary)]" />
                     </div>
-                    <h3 className="text-sm font-bold text-[#1c1b1b] mb-1">{benefit.title}</h3>
-                    <p className="text-xs text-[#4d4732] leading-relaxed">{benefit.desc}</p>
+                    <h3 className="text-sm font-bold text-[var(--color-foreground)] mb-1">{benefit.title}</h3>
+                    <p className="text-xs text-[var(--color-on-surface-variant)] leading-relaxed">{benefit.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -610,17 +610,17 @@ export default function ProductDetailPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10">
             <div>
-              <p className="text-xs font-semibold tracking-widest uppercase text-[#705d00] mb-2">
+              <p className="text-xs font-semibold tracking-widest uppercase text-[var(--color-secondary)] mb-2">
                 DISCOVER MORE
               </p>
               <h2
-                className="text-3xl md:text-4xl font-extrabold tracking-tight text-[#1c1b1b]"
+                className="text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--color-foreground)]"
                              >
                 Expand Your Portfolio
               </h2>
             </div>
             <Link href="/shop" className="mt-4 md:mt-0">
-              <span className="text-[#705d00] font-semibold text-sm flex items-center gap-1.5 hover:underline">
+              <span className="text-[var(--color-secondary)] font-semibold text-sm flex items-center gap-1.5 hover:underline">
                 View all products <ArrowRight className="w-4 h-4" />
               </span>
             </Link>
@@ -635,7 +635,7 @@ export default function ProductDetailPage() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <Link href={`/shop/${rp.slug}`}>
-                  <div className="group h-[420px] rounded-xl bg-[#f6f3f2] overflow-hidden cursor-pointer">
+                  <div className="group h-[420px] rounded-xl luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)]/5 border border-white/10 overflow-hidden cursor-pointer">
                     {/* Image */}
                     <div className={`relative h-[60%] ${rp.bgTint} overflow-hidden`}>
                       <Image
@@ -649,17 +649,17 @@ export default function ProductDetailPage() {
                     </div>
                     {/* Info */}
                     <div className="p-5">
-                      <p className="text-xs font-medium text-[#4d4732] tracking-wide uppercase mb-1">
+                      <p className="text-xs font-medium text-[var(--color-on-surface-variant)] tracking-wide uppercase mb-1">
                         {rp.category}
                       </p>
                       <h3
-                        className="text-xl font-bold text-[#1c1b1b] mb-2"
+                        className="text-xl font-bold text-[var(--color-foreground)] mb-2"
                                              >
                         {rp.name}
                       </h3>
                       <div className="flex items-center justify-between">
-                        <span className="text-lg font-bold text-[#705d00]">{'\u20B9'}{rp.price}</span>
-                        <span className="text-sm font-semibold text-[#705d00] flex items-center gap-1 group-hover:underline">
+                        <span className="text-lg font-bold text-[var(--color-secondary)]">{'\u20B9'}{rp.price}</span>
+                        <span className="text-sm font-semibold text-[var(--color-secondary)] flex items-center gap-1 group-hover:underline">
                           View <ArrowRight className="w-3.5 h-3.5" />
                         </span>
                       </div>

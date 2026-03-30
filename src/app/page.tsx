@@ -5,133 +5,113 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import {
+  ArrowRight,
+  Play,
   ShieldCheck,
   Globe,
-  ClipboardCheck,
-  Ship,
   Package,
-  Play,
-  ArrowRight,
-  Quote,
+  Verified,
 } from 'lucide-react';
 
-// ── Image URLs (Google CDN) ──
-const images = {
-  hero: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBSRXqa_3Y9FIJjOEW5tSTx-N_75gq9r1nVf_rjT_Zkxp1FpFlfp417vnwDIhessYzQnj693PIYE4467J-OuGfDc3HUKlYg91dbPlIHHnOc4ds89uI14qNyqNQ2AeFNcjteuPjQGRA5091SxOdD3-qLwCDce_CmYPYIG7BAk9b-K26z43SHnTu2s7DoAqEmShsqN-eUPqyPVh1PnA2DAgfe_e-eupiP_KLYcUlqQLJ_gLW7wBcrZwrP_wGRW2Kx-ZAJPNYbTM7zgWvp',
-  mango: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6ptDAgiZ2TncDFfKB3taATRb6bWEo8ot09-GA3n6ogLLy2awGBUv6leLjKMHM2vRz3jv5h_wBNzlGRginrg90tFwTrdZ4vVhof6e9byQYoBVBTuXfSQQH6eeUDUQ6B_Kw2VF4RMlevfdRDGKoOwrfOR2WhV4M0_1NaRMsxHBOgrLMjjYRug_QDYavSkiEdE8NwuFBUjiPVbs4WP9Gsam1pwKspt4uGMQwgFfZadl12RdD0cPJmt4Pk4lUgFR9u4sxlf1U7b-v7eMP',
-  banana: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDLCbvewiOLXx3Uirr9T644W9J9dxRkNNNWJbUmLsIubZnQ1nNmdPv9UxHkSbQRmHHXqGolxCeKp6NK89StClWfzikN_rx2U7WFrB12R8tFtAYMnv68bXa1mtxnt9edU4nklZmf-GSlonZwu6h0gaTuRq5Zfq6NqdiWu_3BBtQTfVcie6znhgrYBAWrGZgys4vm2nnAr735sgXu7xdXmN81q49Q63kEXQel_Zu63QoVEf6WfyQgMq6OO5A_yh-BsDRrZYP8-a7GLBJa',
-  pineapple: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB2JS6aMBndIx4DlVEJW0ANAX_XnLIK_rkhnOFjTOzgE9hZjeKI9E6saMQDBaCWTuRTPgm51QOA8mnL170vAZFMO8-GOrNiGtBWLowLHQBOsG1CWUc9_s9tvqo4K-afGrUlpJ-0VWv1UGcC0-LDsm0lvUEK4KQTtRDmGFGcWf_FmdfHBkHqUN48NpiuNsXdNtTO7EDqVtgWTRh0NB_IvwQ-D_UYB1cswqIVMTOX0BSZs64bY3VdJwrHkIxcwAND4M-pV7nob-k9xf3l',
-  jackfruit: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBd2N03cVfTXlcXqr0JmY-7d7bw5jmBa8QQ2mh05OnzUmuVdD6hS1BXICKHJjZzIOn-6ri-z57Kh6o4I_t8D2ImSClZLk9iAuje3IsvLEfd3ZzbgYR0epblA2Y07omTH55rB6d84p1PsTydtdbBe1OI8HoF1wgIcRRhTtGzfS2ucJzbxboZBv0hJDSEW69-OFvfrhgS1Kx4Z-729Ibw4-0zXJZoe99R7_2qxveEJIiixc3K4TFHIVlqI4pJ7fdGPXk6HQGp-uGQkUmM',
-  moringa: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDDK3gCqItkeCFUYonSx_Q4I6jTu6e1UdK3N4uDj4_zSzVG9qtAg-m_l9MZTgpCUf7ejOqT7Axs6UwwDXfy2qWZV01UljUI6yFWNiXJKrJEpeqfqOldv7Y01-cWXIfdjn9orEacN_tQcRLskQg0vKSfBDaNta_oIChiH-esQ1zHdS8vuI7RMk0VgsNO_xNf3-XBmVmtP2B5pE8lymWPGMp5n6cwg1BeWvV7ZBgnwe-VnvxC2IVZQaFj_bziV2LExv1A-CfoptTcCZwx',
-  jamun_powder: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBv1D9Ulrmt6M5GvNN_fko0dUtrPS-AroXAlpOthD1kgOzJL4ULEL4QsqdLaEkH4OAojxi_RmH0XGb_7mZnt8GbPyyNDB91DDmF-4ijIfIbCXsnfDt96z_r2Hx78fl6CRBgL9zNfJQIPCy3aR4Jz-lUncyATk_Kbi7CZ3DsCSEV7tux5TujTSFWAjuAl-1x4YTgJcxvMedSJSYEco1Tbw6ATX7UKJ0oe1ecnXajerhcW3TOP6kFXlfSxFiZ0Egd2onHkF6CizZdFB35',
-  mango_powder: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCmnILGSlVSSNZzJLrKf7WAygot5YtJJFwKhQ7Sa2Net_U8ICKmtVUpWHkmQA3M5oKdchZrV_GcmJp-F1ipnoksXyNsyhnEvy86vFg5VnAOi1Z46Tk55EVeAhgC9Fz2WYIJ1K37Gy17RXpstKLqr-hugRw0YJD3WaghGcogZZ6YfjAZreUqVkeGVjAFhJNMag-GHTZHOATC8HNYGH-nkIpTbdOZ3LeqsmW5NLHdJ9qaSF5cgyZHbdFoVK7Mn7olBKF6oosY6lxVvSze',
-  pineapple_powder: 'https://lh3.googleusercontent.com/aida-public/AB6AXuADhT9tG-b1W38WTIRiluLTD6yC_bWeTfMEmt5f1smzpWGpKda3fXbiikAS-5qS8HJwloXvJWJ8nIkgqlEeP07kwmIXEC-3svJgOYQU8VkIp_K9_tzUs5NvM6EVq59JewZhUREHrQ6cU3deP7jSOsk9tAt5STzYi85buFRkNRPa6Z7TGBSAjFTSes0rS4ncJeo8c_LkwnZZ5X8HPPJW7VglCWtqvweqQjXIN-2WBXZH3jx6R_3iyMA7kO59Hz4ODaXpsCu1mz8-mQdi',
-};
+// ── Image URLs (Local & Remote) ──
+import { productImages } from '@/lib/images';
 
 // ── Product data ──
 const fruits = [
   {
-    name: 'Alphonso Mango',
+    name: 'Mango Cubes',
     slug: 'mango-cubes',
-    description: 'Premium Ratnagiri Alphonso mangoes, freeze-dried to preserve their iconic sweetness and aroma.',
-    category: 'Freeze-Dried Fruit',
-    image: images.mango,
+    description: 'Golden super-sweet cubes for premium snacking.',
+    image: productImages['mango-cubes'].main,
+    tags: ['Top Seller', 'Pure'],
+    price: '$8.50',
+    nutritional: [
+      { label: 'Vitamin A', value: '45%' },
+      { label: 'Dietary Fiber', value: '3.2g' },
+    ],
   },
   {
-    name: 'Banana',
-    slug: 'banana-cubes',
-    description: 'Ripe Robusta bananas from South India, crispy and naturally sweet with no additives.',
-    category: 'Freeze-Dried Fruit',
-    image: images.banana,
-  },
-  {
-    name: 'Pineapple',
+    name: 'Pineapple Cubes',
     slug: 'pineapple-cubes',
-    description: 'Tangy-sweet Mauritius pineapples, retaining their tropical zing in every crunchy bite.',
-    category: 'Freeze-Dried Fruit',
-    image: images.pineapple,
+    description: 'Tropical tangy cubes, vibrant and refreshing.',
+    image: productImages['pineapple-cubes'].main,
+    tags: ['Vitamin C', 'Tangy'],
+    price: '$8.00',
+    nutritional: [
+      { label: 'Vitamin C', value: 'High' },
+      { label: 'Digestion', value: 'Bromelain' },
+    ],
   },
   {
-    name: 'Jackfruit',
+    name: 'Jackfruit Cubes',
     slug: 'jackfruit-cubes',
-    description: 'Kerala jackfruit pods, naturally fragrant and fiber-rich, perfectly preserved.',
-    category: 'Freeze-Dried Fruit',
-    image: images.jackfruit,
+    description: 'Sweet and exotic tropical bites.',
+    image: productImages['jackfruit-cubes'].main,
+    tags: ['Exotic', 'High Energy'],
+    price: '$9.50',
+    nutritional: [
+      { label: 'Vitamin C', value: 'Good' },
+      { label: 'Potassium', value: 'Rich' },
+    ],
+  },
+  {
+    name: 'Black Plum (Jamun)',
+    slug: 'jamun-cubes',
+    description: 'Exotic purple power bites packed with antioxidants.',
+    image: productImages['jamun-cubes'].main,
+    tags: ['Antioxidant', 'Wild Harvest'],
+    price: '$9.20',
+    nutritional: [
+      { label: 'Anthocyanins', value: 'Exceptional' },
+      { label: 'Iron Content', value: 'Rich' },
+    ],
+  },
+  {
+    name: 'Banana Crisp',
+    slug: 'banana-cubes',
+    description: 'Naturally sweet slices with a delicate crunch.',
+    image: productImages['banana-cubes'].main,
+    tags: ['Energy Boost', 'Potassium'],
+    price: '$6.00',
+    nutritional: [
+      { label: 'Potassium', value: '360mg' },
+      { label: 'Energy Density', value: 'High' },
+    ],
   },
 ];
 
 const powders = [
   {
-    name: 'Moringa Powder',
+    name: 'Pure Moringa',
     slug: 'moringa-powder',
-    description: 'Nutrient-dense drumstick leaves from Tamil Nadu, packed with iron and antioxidants.',
-    category: 'Nutrient Powder',
-    image: images.moringa,
+    description: 'Bright green life force.',
+    image: productImages['moringa-powder'].main,
+    hoverText: '99.8% Purity Index',
+    price: '$12.00',
   },
   {
-    name: 'Jamun Powder',
-    slug: 'jamun-powder',
-    description: 'Indian blackberry fruit powder, traditionally valued for blood sugar support.',
-    category: 'Nutrient Powder',
-    image: images.jamun_powder,
+    name: 'Watermelon Splash',
+    slug: 'watermelon-powder',
+    description: 'Summery hydration.',
+    image: productImages['watermelon-powder'].main,
+    hoverText: 'Instant Solubility',
+    price: '$14.00',
   },
   {
-    name: 'Mango Powder',
-    slug: 'mango-powder',
-    description: 'Amchur-style mango powder made from premium Alphonso, perfect for smoothies and cooking.',
-    category: 'Nutrient Powder',
-    image: images.mango_powder,
+    name: 'Zesty Lemon',
+    slug: 'lemon-powder',
+    description: 'Sunny citrus joy.',
+    image: productImages['lemon-powder'].main,
+    hoverText: 'Vitamin C Focus',
+    price: '$10.50',
   },
   {
     name: 'Pineapple Powder',
     slug: 'pineapple-powder',
-    description: 'Vitamin C-rich pineapple powder, great for juices, desserts, and daily nutrition.',
-    category: 'Nutrient Powder',
-    image: images.pineapple_powder,
-  },
-];
-
-const exportServices = [
-  {
-    icon: Globe,
-    title: 'Global Logistics',
-    description: 'End-to-end international shipping with temperature-controlled containers to over 40 countries.',
-  },
-  {
-    icon: ClipboardCheck,
-    title: 'Quality Control',
-    description: 'FSSAI, ISO 22000, and HACCP certified processes ensuring consistent quality in every batch.',
-  },
-  {
-    icon: Ship,
-    title: 'Bulk Shipping',
-    description: 'Flexible MOQs with competitive pricing for wholesale, white-label, and private-label orders.',
-  },
-  {
-    icon: Package,
-    title: 'Custom Packaging',
-    description: 'Bespoke packaging design and branding services tailored for your target market.',
-  },
-];
-
-const testimonials = [
-  {
-    quote: 'FreezeDance has been our go-to supplier for over two years. Their Alphonso mango cubes are consistently top-quality and our customers love them.',
-    name: 'Sarah Mitchell',
-    role: 'Procurement Head, NatureBite UK',
-    avatar: 'SM',
-  },
-  {
-    quote: 'The moringa powder is exceptional. We tested multiple suppliers across Asia and FreezeDance stood out for purity, packaging, and reliable delivery.',
-    name: 'Takeshi Yamamoto',
-    role: 'Product Manager, GreenLife Japan',
-    avatar: 'TY',
-  },
-  {
-    quote: 'From sampling to bulk shipment, the entire process was seamless. Their team understands export compliance and documentation thoroughly.',
-    name: 'Priya Deshmukh',
-    role: 'Director, OrganicRoots Dubai',
-    avatar: 'PD',
+    description: 'Tropical tangy boost.',
+    image: productImages['pineapple-powder'].main,
+    hoverText: 'Great for mixing',
+    price: '$11.00',
   },
 ];
 
@@ -158,339 +138,436 @@ function AnimatedSection({
   );
 }
 
-// ── Product card ──
-function ProductCard({
-  product,
-  index,
-}: {
-  product: (typeof fruits)[0];
-  index: number;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-    >
-      <Link href={`/shop/${product.slug}`} className="group block">
-        <div className="rounded-[2rem] bg-[#f6f3f2] p-8">
-          {/* Image container */}
-          <div className="aspect-square bg-white rounded-2xl overflow-hidden mb-6 flex items-center justify-center">
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={400}
-              height={400}
-              unoptimized
-              className="object-cover w-full h-full group-hover:scale-[1.03] transition-transform duration-500 ease-out"
-            />
-          </div>
-          {/* Info */}
-          <p className="text-xs uppercase tracking-widest text-[#705d00] font-semibold mb-2">
-            {product.category}
-          </p>
-          <h3 className="text-xl font-bold text-[#1c1b1b] mb-2">
-            {product.name}
-          </h3>
-          <p className="text-sm text-[#4d4732] leading-relaxed">
-            {product.description}
-          </p>
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
-
 // ── Main page ──
 export default function HomePage() {
   return (
-    <div className="bg-[#fcf9f8]">
+    <div className="bg-[var(--color-background)] min-h-screen relative">
+      
+      {/* Premium Dark Glass Glowing Ambient Blobs (Site-wide) */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[-5%] left-[-10%] w-[50rem] h-[50rem] bg-[#a7f3d0] opacity-[0.06] blur-[150px] rounded-full" />
+        <div className="absolute top-[20%] right-[-15%] w-[60rem] h-[60rem] bg-[#fccc4c] opacity-[0.08] blur-[160px] rounded-full" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-[-10%] left-[20%] w-[40rem] h-[40rem] bg-[#34d399] opacity-[0.07] blur-[140px] rounded-full" style={{ animationDelay: '4s' }} />
+      </div>
+
       {/* ═══════════════════════════════════════
           HERO SECTION
          ═══════════════════════════════════════ */}
-      <section className="relative min-h-[calc(100vh-6rem)] flex items-center w-full">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-0">
+      <section className="relative min-h-screen flex items-center w-full pt-28 pb-16">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-0 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left column — text */}
-            <div>
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
+            
+            {/* Left column */}
+            <div className="z-10 relative">
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="text-xs uppercase tracking-widest text-[#705d00] font-bold mb-6"
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="inline-flex items-center gap-2 luxe-glass px-5 py-2.5 mb-8"
               >
-                100% Natural
-              </motion.p>
+                <ShieldCheck className="w-4 h-4 text-[var(--color-primary)] opacity-90" />
+                <span className="text-xs uppercase tracking-[0.2em] font-extrabold text-[var(--color-primary)]">
+                  Premium Quality Exports
+                </span>
+              </motion.div>
 
               <motion.h1
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-[#1c1b1b] leading-[1.05]"
+                transition={{ duration: 0.8, delay: 0.2, type: 'spring', bounce: 0.4 }}
+                className="text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-[var(--color-foreground)] leading-[1.05] font-display"
               >
-                Nature&apos;s Freshness,{' '}
-                <span className="text-[#705d00] italic">Freeze-Dried</span> for
-                the World
+                Nature&apos;s Essence,{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[#8bcdae]">Freeze-Dried</span>
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.35 }}
-                className="text-lg text-[#4d4732] mt-6 max-w-lg leading-relaxed"
+                className="text-lg md:text-xl text-[var(--color-on-surface-variant)] font-medium mt-8 max-w-lg leading-relaxed"
               >
-                We bridge the gap between tropical orchards and international
-                markets with premium freeze-dried fruits and nutrient powders —
-                preserving 97% of nature&apos;s goodness.
+                We bridge the gap between tropical orchards and international markets with premium freeze-dried products — preserving 97% of nature&apos;s goodness in every bite.
               </motion.p>
 
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                className="mt-8 flex flex-wrap items-center gap-4"
+                className="mt-10 flex flex-wrap items-center gap-4"
               >
-                <Link
-                  href="/shop"
-                  className="btn-primary"
-                >
-                  Explore Collections
-                  <ArrowRight className="w-4 h-4" />
+                <Link href="/shop" className="btn-primary">
+                  Explore Catalogue
+                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <button className="btn-secondary">
-                  <Play className="w-4 h-4" />
-                  Watch Process
+                   <Play className="w-4 h-4 mr-2 opacity-80" />
+                   Process Film
                 </button>
               </motion.div>
             </div>
 
-            {/* Right column — image */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative hidden lg:block"
-            >
-              <div className="rounded-[2.5rem] overflow-hidden">
-                <Image
-                  src={images.hero}
-                  alt="FreezeDance product packaging"
-                  width={640}
-                  height={640}
-                  unoptimized
-                  className="object-cover w-full h-auto"
-                  priority
-                />
+            {/* Right column — Static, High-Clarity "Family Bundle" lineup with project images and background text */}
+            <div className="relative hidden lg:flex items-center justify-center z-10 w-full max-w-2xl mx-auto h-[650px] mt-12 bg-transparent overflow-visible">
+              
+              {/* Massive Stylized Background Text Layer (SWEET-style inspiration) */}
+              <div className="absolute inset-x-0 inset-y-0 flex flex-col items-center justify-center select-none pointer-events-none z-0 opacity-[0.03]">
+                <motion.h2
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, delay: 0.2 }}
+                  className="font-display font-black text-[16rem] leading-[0.75] tracking-tighter text-white drop-shadow-[0_0_80px_rgba(255,255,255,0.1)] uppercase whitespace-nowrap"
+                >
+                  Freeze
+                </motion.h2>
+                <motion.h2
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, delay: 0.4 }}
+                  className="font-display font-black text-[16rem] leading-[0.75] tracking-tighter text-white drop-shadow-[0_0_80px_rgba(255,255,255,0.1)] uppercase whitespace-nowrap"
+                >
+                  Dance
+                </motion.h2>
               </div>
-              {/* Overlay card */}
-              <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-lg flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#e8f5e9] flex items-center justify-center flex-shrink-0">
-                  <ShieldCheck className="w-6 h-6 text-[#006e1c]" />
-                </div>
-                <div>
-                  <p className="font-bold text-[#1c1b1b] text-sm">
-                    Purity Check
-                  </p>
-                  <p className="text-xs text-[#4d4732]">
-                    100% Organic additive-free process
-                  </p>
-                </div>
+
+              {/* Product Bundle — High Clarity Static Cluster */}
+              <div className="relative w-full h-full flex items-center justify-center z-10">
+                
+                {/* Back Left — Pineapple (Tucked Behind) */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, x: -80, rotate: -10 }}
+                  animate={{ opacity: 1, scale: 1, x: -90, rotate: -12 }}
+                  transition={{ duration: 0.8, delay: 0.5, type: 'spring', bounce: 0.3 }}
+                  whileHover={{ scale: 1.05, rotate: -5, zIndex: 45 }}
+                  className="absolute left-[15%] bottom-[150px] w-56 aspect-[4/5] bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/40 p-2 z-20 cursor-pointer overflow-hidden transition-all duration-300"
+                >
+                  <div className="relative w-full h-full overflow-hidden">
+                    <Image
+                      src={productImages['pineapple-cubes'].main}
+                      alt="Pineapple Cubes"
+                      fill
+                      className="object-contain p-2 hover:scale-105 transition-transform duration-500"
+                      priority
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Back Right — Banana (Tucked Behind) */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, x: 80, rotate: 10 }}
+                  animate={{ opacity: 1, scale: 1, x: 90, rotate: 12 }}
+                  transition={{ duration: 0.8, delay: 0.6, type: 'spring', bounce: 0.3 }}
+                  whileHover={{ scale: 1.05, rotate: 5, zIndex: 45 }}
+                  className="absolute right-[15%] bottom-[160px] w-52 aspect-[4/5] bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/40 p-2 z-20 cursor-pointer overflow-hidden transition-all duration-300"
+                >
+                  <div className="relative w-full h-full overflow-hidden">
+                    <Image
+                      src={productImages['banana-cubes'].main}
+                      alt="Banana Cubes"
+                      fill
+                      className="object-contain p-2 hover:scale-105 transition-transform duration-500"
+                      priority
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Center Primary — Mango (Hero Product) */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, y: 100 }}
+                  animate={{ opacity: 1, scale: 1, y: 0, rotate: -2 }}
+                  transition={{ duration: 1, delay: 0.3, type: 'spring', bounce: 0.4 }}
+                  whileHover={{ scale: 1.1, rotate: 0, zIndex: 50 }}
+                  className="absolute left-1/2 -translate-x-1/2 bottom-12 w-64 aspect-[4/5] bg-white rounded-[2.5rem] shadow-[0_40px_100px_rgba(0,0,0,0.8)] border-2 border-white/60 p-4 z-40 cursor-pointer overflow-hidden transition-all duration-300"
+                >
+                  <div className="relative w-full h-full overflow-hidden flex items-center justify-center">
+                    <Image
+                      src={productImages['mango-cubes'].main}
+                      alt="Mango Cubes"
+                      fill
+                      className="object-contain p-2 hover:scale-110 transition-transform duration-500"
+                      priority
+                    />
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="text-[11px] uppercase tracking-widest font-black text-white bg-[var(--color-primary)] px-3 py-1.5 rounded-full shadow-lg">
+                        Best Seller
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Foreground — Moringa Sachet (Leaning Front) */}
+                <motion.div
+                  initial={{ opacity: 0, x: 100, y: 100, rotate: 35 }}
+                  animate={{ opacity: 1, x: 0, y: 0, rotate: 22 }}
+                  transition={{ duration: 1, delay: 0.7, type: 'spring', bounce: 0.3 }}
+                  whileHover={{ scale: 1.25, rotate: 10, zIndex: 60 }}
+                  className="absolute bottom-20 right-[10%] w-32 aspect-[3/4] bg-white rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.6)] border border-white/50 p-2.5 z-55 cursor-pointer overflow-hidden transition-all duration-300"
+                >
+                  <div className="relative w-full h-full overflow-hidden">
+                    <Image
+                      src={productImages['moringa-powder'].main}
+                      alt="Moringa Powder"
+                      fill
+                      className="object-contain p-1 hover:scale-110 transition-transform duration-500"
+                      priority
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Anchored Premium Badge */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, type: 'spring' }}
+                  className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[85%] z-[60] luxe-glass px-8 py-5 flex items-center justify-center gap-5 border border-white/30 shadow-[0_15px_50px_rgba(0,0,0,0.5)]"
+                >
+                  <div className="w-12 h-12 flex-shrink-0 rounded-full border border-[var(--color-secondary)]/40 flex items-center justify-center bg-[var(--color-secondary)]/20 shadow-inner">
+                    <Verified className="w-6 h-6 text-[var(--color-secondary)]" />
+                  </div>
+                  <div className="text-center sm:text-left">
+                    <p className="font-black text-[var(--color-foreground)] text-sm uppercase tracking-wider font-display">
+                      Signature Family Bundle
+                    </p>
+                    <p className="text-xs text-[var(--color-on-surface-variant)] mt-1 font-bold tracking-wide opacity-80">
+                      ISO 22000 Certified Quality • 100% Raw Bioavailable
+                    </p>
+                  </div>
+                </motion.div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════
-          FREEZE-DRIED FRUITS SECTION
+          SIGNATURE FRUIT COLLECTION (Glass Cards)
          ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-16 md:py-24 w-full">
+      <AnimatedSection className="py-24 relative z-10">
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-          {/* Section header */}
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 md:mb-16">
+          
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
             <div>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-[#1c1b1b] tracking-tight">
-                Freeze-Dried Fruits
+              <p className="text-sm font-extrabold text-[var(--color-secondary)] uppercase tracking-[0.2em] mb-3 drop-shadow-sm">Premium Tier</p>
+              <h2 className="font-display text-4xl md:text-5xl font-extrabold text-[var(--color-foreground)] tracking-tight">
+                Signature Collection
               </h2>
-              <p className="text-[#4d4732] mt-2 max-w-md">
-                Our signature collection of crispy, crunchy fruit cubes made from
-                handpicked Indian fruits.
-              </p>
             </div>
-            <Link
-              href="/shop"
-              className="text-[#705d00] font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all"
-            >
-              View Catalog
-              <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
 
-          {/* Product grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {fruits.map((product, i) => (
-              <ProductCard key={product.slug} product={product} index={i} />
-            ))}
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* ═══════════════════════════════════════
-          NUTRIENT POWDERS SECTION
-         ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-16 md:py-24 w-full bg-[#f0eded]">
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-          {/* Section header */}
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 md:mb-16">
-            <div>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-[#1c1b1b] tracking-tight">
-                Nutrient Powders
-              </h2>
-              <p className="text-[#4d4732] mt-2 max-w-md">
-                Superfoods ground to perfection — add to smoothies, recipes, or
-                enjoy as daily supplements.
-              </p>
-            </div>
-            <Link
-              href="/shop"
-              className="text-[#705d00] font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all"
-            >
-              View Catalog
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          {/* Product grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-            {powders.map((product, i) => (
-              <ProductCard key={product.slug} product={product} index={i} />
-            ))}
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* ═══════════════════════════════════════
-          EXPORT SERVICES SECTION
-         ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-16 md:py-24 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-          {/* LEFT — Image collage */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-4">
-              <img
-                src="https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&q=80"
-                alt="Cargo container ship for international fruit export"
-                className="w-full h-64 object-cover rounded-3xl"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1578307986144-d248cb7434db?w=800&q=80"
-                alt="Food quality control laboratory testing"
-                className="w-full h-80 object-cover rounded-3xl"
-              />
-            </div>
-            <div className="space-y-4 pt-12">
-              <img
-                src="https://images.unsplash.com/photo-1651525670033-279c26cc2347?w=800&q=80"
-                alt="Bulk packaging boxes ready for export shipment"
-                className="w-full h-80 object-cover rounded-3xl"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1703194531119-e8b98a555cb6?w=800&q=80"
-                alt="Aerial view of container port global trade hub"
-                className="w-full h-64 object-cover rounded-3xl"
-              />
-            </div>
-          </div>
-
-          {/* RIGHT — Text content */}
-          <div>
-            <span className="text-[#705d00] font-bold tracking-widest text-xs uppercase mb-4 block">
-              End-to-End Solutions
-            </span>
-            <h2 className="text-5xl font-display font-bold text-[#1c1b1b] tracking-tight mb-8">
-              Export Services
-            </h2>
-            <div className="space-y-8">
-              <div className="flex gap-6 group">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-[#705d00]/20 flex items-center justify-center text-[#705d00] group-hover:bg-[#705d00] group-hover:text-white transition-all duration-300">
-                  <Globe className="w-5 h-5" />
-                </div>
-                <div>
-                  <h5 className="text-xl font-bold mb-2 font-display">Global Distribution</h5>
-                  <p className="text-[#4d4732]">
-                    Seamless multi-modal shipping with temperature-controlled tracking across 40+ countries worldwide.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-6 group">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-[#705d00]/20 flex items-center justify-center text-[#705d00] group-hover:bg-[#705d00] group-hover:text-white transition-all duration-300">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div>
-                  <h5 className="text-xl font-bold mb-2 font-display">Quality Control &amp; QA</h5>
-                  <p className="text-[#4d4732]">
-                    FSSAI, ISO 22000, and HACCP certified processes ensuring consistent quality in every batch.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-6 group">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-[#705d00]/20 flex items-center justify-center text-[#705d00] group-hover:bg-[#705d00] group-hover:text-white transition-all duration-300">
-                  <Package className="w-5 h-5" />
-                </div>
-                <div>
-                  <h5 className="text-xl font-bold mb-2 font-display">Custom Packaging</h5>
-                  <p className="text-[#4d4732]">
-                    Bespoke packaging design and branding services tailored for your target market.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* ═══════════════════════════════════════
-          TESTIMONIALS SECTION
-         ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-16 md:py-24 w-full bg-[#f6f3f2]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 md:mb-16">
-            <span className="text-[#705d00] font-bold tracking-widest text-xs uppercase mb-4 block">
-              Trusted Partnerships
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#1c1b1b] tracking-tight">
-              What Our Partners Say
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((t, i) => (
               <motion.div
-                key={t.name}
-                initial={{ opacity: 0, y: 20 }}
+                key={product.slug}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`group bg-white rounded-[2.5rem] p-8 shadow-sm hover:shadow-xl border border-[#f0eded] transition-shadow duration-300${i === 1 ? ' md:mt-12' : ''}`}
+                transition={{ duration: 0.6, delay: i * 0.1, type: "spring", bounce: 0.3 }}
               >
-                <Quote className="w-8 h-8 text-[#705d00]/20 group-hover:text-[#705d00] transition-colors duration-300 mb-4" />
-                <p className="text-[#1c1b1b] leading-relaxed text-sm mb-6">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#705d00] flex items-center justify-center text-white text-xs font-bold">
-                    {t.avatar}
+                <Link href={`/shop/${product.slug}`} className="block h-full cursor-pointer group">
+                  <div className="glass-card h-full min-h-[520px] flex flex-col p-6 border border-[var(--color-outline-variant)]">
+                    
+                    {/* Header */}
+                    <div className="flex justify-between items-start mb-6 z-10 text-[var(--color-foreground)]">
+                       <span className="font-display font-bold text-2xl tracking-tight drop-shadow-md">
+                         {product.name}
+                       </span>
+                    </div>
+
+                    {/* Price Pill Glass */}
+                    <div className="absolute top-6 right-6 z-20">
+                      <div className="price-tag-glass font-display tracking-tight hover:scale-105">
+                        {product.price}
+                      </div>
+                    </div>
+
+                    {/* Image Container */}
+                    <div className="relative flex-grow flex items-center justify-center w-full mb-6 mt-4">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        unoptimized
+                        className="object-contain image-zoom"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[var(--color-background)] via-[var(--color-background)]/90 to-transparent p-6 pt-16 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none rounded-b-xl z-10 flex flex-col justify-end">
+                        <div className="space-y-3">
+                          {product.nutritional.map((item) => (
+                            <div key={item.label} className="flex justify-between items-center text-[var(--color-foreground)] border-b border-white/10 pb-1.5 last:border-0">
+                              <span className="text-xs uppercase tracking-wider font-bold opacity-80">{item.label}</span>
+                              <span className="text-sm font-extrabold text-[var(--color-primary)] tracking-wide">{item.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Footer Details */}
+                    <div className="luxe-glass p-4 mt-auto rounded-xl border border-[var(--color-outline-variant)]">
+                      <p className="text-sm text-[var(--color-on-surface-variant)] font-medium leading-relaxed mb-4">{product.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {product.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-xs font-bold px-3 py-1.5 rounded-full bg-white/10 text-[var(--color-foreground)] border border-white/10"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
                   </div>
-                  <div>
-                    <p className="text-[#1c1b1b] font-semibold text-sm">
-                      {t.name}
-                    </p>
-                    <p className="text-[#705d00] text-xs uppercase tracking-wide font-semibold">{t.role}</p>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* ═══════════════════════════════════════
+          NUTRIENT-DENSE MICRO-POWDERS
+         ═══════════════════════════════════════ */}
+      <AnimatedSection className="py-24 relative overflow-hidden z-10">
+        
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-16">
+            <p className="text-sm font-extrabold text-[var(--color-secondary)] uppercase tracking-[0.2em] mb-3 drop-shadow-sm">Concentrates</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-foreground)] tracking-tight font-display">
+              Nutrient-Dense Micro-Powders
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {powders.map((powder, i) => (
+              <motion.div
+                key={powder.slug}
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.6, delay: i * 0.1, type: "spring", bounce: 0.3 }}
+                className="group cursor-pointer"
+              >
+                <div className="glass-card p-5 flex flex-col h-full min-h-[380px] border border-[var(--color-outline-variant)] hover:border-[var(--color-primary)]/40 transition-colors">
+                  <div className="flex justify-between items-start mb-4 z-10">
+                     <span className="text-sm font-bold text-[var(--color-primary)] tracking-wider opacity-90">{powder.price}</span>
+                  </div>
+                  
+                  <div className="aspect-square relative flex-grow mb-4 flex items-center justify-center">
+                    <Image
+                      src={powder.image}
+                      alt={powder.name}
+                      fill
+                      unoptimized
+                      className="object-contain image-zoom"
+                    />
+                  </div>
+                  
+                  <div className="luxe-glass p-3 text-center rounded-xl border border-white/5">
+                    <h3 className="text-base font-bold text-[var(--color-foreground)] font-display tracking-tight">{powder.name}</h3>
+                    <p className="text-xs text-[var(--color-on-surface-variant)] mt-1">{powder.description}</p>
                   </div>
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* ═══════════════════════════════════════
+          EXPORT INFRASTRUCTURE
+         ═══════════════════════════════════════ */}
+      <AnimatedSection className="py-24 mt-12 mb-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          
+          <div className="luxe-glass p-8 md:p-16 rounded-[3rem] border border-[var(--color-outline-variant)] shadow-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+              
+              {/* LEFT — Image collage & Core values */}
+              <div className="grid grid-cols-2 gap-6 relative">
+                
+                <div className="space-y-6 relative z-10">
+                  <div className="luxe-glass rounded-3xl h-72 flex flex-col items-center justify-center text-center p-8 border border-[var(--color-outline-variant)] bg-gradient-to-br from-[var(--color-tertiary)] to-[var(--color-background)]">
+                    <div className="w-16 h-16 rounded-full bg-[var(--color-primary)]/10 flex items-center justify-center mb-6">
+                      <Globe className="w-8 h-8 text-[var(--color-primary)]" />
+                    </div>
+                    <h3 className="font-display font-bold text-xl text-[var(--color-foreground)] mb-2">Export Quality</h3>
+                    <p className="text-sm text-[var(--color-on-surface-variant)] leading-relaxed">Supplying premium grade produce to global markets seamlessly.</p>
+                  </div>
+                  <div className="glass-card p-6 flex items-center justify-center text-center">
+                    <p className="font-bold text-[var(--color-foreground)] text-sm uppercase tracking-[0.2em] font-display">Global Reach</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-6 pt-12 relative z-10">
+                  <div className="glass-card p-6 flex flex-col items-center justify-center text-center">
+                    <div className="w-12 h-12 rounded-full border border-[var(--color-primary)]/30 flex items-center justify-center mb-3 bg-[var(--color-primary)]/10">
+                      <Verified className="w-6 h-6 text-[var(--color-primary)]" />
+                    </div>
+                    <p className="font-bold text-[var(--color-foreground)] text-sm uppercase tracking-wider font-display">Zero Additives</p>
+                  </div>
+                  <div className="luxe-glass rounded-3xl h-64 flex flex-col items-center justify-center p-8 border border-[var(--color-outline-variant)] bg-[var(--color-tertiary)]/70">
+                    <div className="w-16 h-16 rounded-full bg-[var(--color-secondary)]/10 flex items-center justify-center mb-6">
+                      <ShieldCheck className="w-8 h-8 text-[var(--color-secondary)]" />
+                    </div>
+                    <h3 className="font-display font-bold text-xl text-[var(--color-foreground)] mb-2">Certified Pure</h3>
+                    <p className="text-sm text-[var(--color-on-surface-variant)] leading-relaxed text-center">ISO 22000 quality control for maximum unadulterated purity.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* RIGHT — Text content */}
+              <div>
+                <p className="text-sm font-extrabold text-[var(--color-secondary)] uppercase tracking-[0.2em] mb-4 drop-shadow-md">
+                  Infrastructure
+                </p>
+                <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-foreground)] tracking-tight font-display mb-8">
+                  Built for Maximum Purity.
+                </h2>
+                <p className="text-[var(--color-on-surface-variant)] text-lg leading-relaxed mb-10 font-medium tracking-wide">
+                  Our vertically integrated pipeline ensures every single product reaches your door with uncompromised quality, retaining 97% of its nutritional value and brilliant natural flavor.
+                </p>
+
+                <div className="space-y-8">
+                  {/* Feature 1 */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="flex gap-6 group items-start"
+                  >
+                    <div className="flex-shrink-0 w-14 h-14 rounded-2xl luxe-glass border border-[var(--color-outline-variant)] flex items-center justify-center transform group-hover:scale-110 group-hover:bg-[var(--color-primary)]/10 transition-all">
+                      <Package className="w-6 h-6 text-[var(--color-primary)] drop-shadow-sm" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold font-display text-[var(--color-foreground)] mb-2 tracking-tight">Cold-Sublimation Tech</h4>
+                      <p className="text-[var(--color-on-surface-variant)] leading-relaxed text-sm font-medium tracking-wide">
+                        Our process locks in vital nutrients, brilliant flavor, and unadulterated natural color deep inside the fruit.
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* Feature 2 */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="flex gap-6 group items-start"
+                  >
+                    <div className="flex-shrink-0 w-14 h-14 rounded-2xl luxe-glass border border-[var(--color-outline-variant)] flex items-center justify-center transform group-hover:scale-110 group-hover:bg-[var(--color-primary)]/10 transition-all">
+                      <Globe className="w-6 h-6 text-[var(--color-primary)] drop-shadow-sm" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold font-display text-[var(--color-foreground)] mb-2 tracking-tight">Bespoke White-Label</h4>
+                      <p className="text-[var(--color-on-surface-variant)] leading-relaxed text-sm font-medium tracking-wide">
+                        End-to-end private-label services with custom packaging and rigorous global standards.
+                      </p>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </AnimatedSection>
