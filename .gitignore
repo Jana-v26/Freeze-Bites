@@ -1,0 +1,12 @@
+# ── zip archives ──
+*.zip
+
+# ── temp / scratch folders ──
+tmp/
+stitch-designs/
+
+# ── macOS ──
+.DS_Store
+
+# ── Windows ──
+Thumbs.db
