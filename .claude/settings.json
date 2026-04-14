@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(taskkill /PID 186892 /F)",
+      "Bash(cmd /c \"taskkill /PID 186892 /F\")",
+      "Bash(cmd /c \"taskkill /PID 186892 /F 2>&1\")",
+      "Bash(powershell -Command \"Stop-Process -Id 186892 -Force -ErrorAction SilentlyContinue; Write-Output 'done'\")",
+      "Bash(powershell -Command \"Start-Sleep 6; Get-Content 'C:\\\\Users\\\\JANARD~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\e--Android-Studio-Projects-freeze-dance\\\\de3e9687-8298-4481-b46a-8ff761a46120\\\\tasks\\\\b94lar9bg.output'\")",
+      "Bash(rm -rf \"e:/Android Studio Projects/freeze-dance/backend/.git\")",
+      "Bash(rm -rf \"e:/Android Studio Projects/freeze-dance/frontend/.git\")",
+      "Bash(./mvnw -q -DskipTests compile)",
+      "Bash(python3 -c ':*)",
+      "Bash(py --version)",
+      "Bash(where python3:*)",
+      "Bash(where python:*)"
+    ]
+  }
+}
