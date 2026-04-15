@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-primary: #a7f3d0; /* Bright Mint for neon-like text highlights */
-  --color-on-primary: #064e3b; /* Extremely dark text for mint backgrounds */
-  --color-primary-container: #fccc4c; /* Luxurious Gold Accent */
+  /* FreezeDelights Brand Colors — Kuli Kuli / Tropical Vibrant Theme */
+  --color-fd-green:      #085c4a;   /* Primary solid green */
+  --color-fd-green-mid:  #147b67;   /* Hover state green */
+  --color-fd-lime:       #c5d836;   /* Bright lime for accents */
+  --color-fd-yellow:     #f8ba16;   /* Hero/product cluster vibrant mango yellow */
+  --color-fd-orange:     #eb5a2f;   /* Badge/accent orange */
+  --color-fd-cream:      #f6eed8;   /* Warm off-white for cards/backgrounds */
+  --color-fd-white:      #ffffff;
+  --color-fd-text:       #1a1a1a;
   
-  --color-background: #1B5C3D; /* Vivid bright emerald */
-  --color-foreground: #f8faf9; /* Diamond White Text for max legibility */
-  
-  --color-surface: rgba(255, 255, 255, 0.04);
-  --color-on-surface: #f8faf9;
-  --color-on-surface-variant: #b5c7c0; /* Slightly brighter secondary text for contrast */
-  --color-outline-variant: rgba(255, 255, 255, 0.12); /* Glossy specular edge */
-  
-  --color-secondary: #e8bd3a; /* Deep Premium Gold */
-  --color-tertiary: #154D34; /* Slightly lighter forest green */
-  --color-accent: #fccc4c;
+  /* Category indicator colors */
+  --color-cat-teal:      #5ab2a1;
+  --color-cat-pink:      #f0b8af;
+  --color-cat-blue:      #3087bd;
+  --color-cat-berry:     #9a3b5a;
 
-  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-sans:    var(--font-inter), system-ui, sans-serif;
   --font-display: var(--font-plus-jakarta-sans), system-ui, sans-serif;
 }
 
@@ -32,9 +32,8 @@ html {
 }
 
 body {
-  background: radial-gradient(ellipse at 50% -10%, #2E8056 0%, #1B5C3D 40%, #0D3D24 100%) fixed;
-  background-color: #1B5C3D;
-  color: var(--color-foreground);
+  background-color: #ffffff;
+  color: var(--color-fd-text);
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -42,247 +41,11 @@ body {
   line-height: 1.6;
 }
 
-h1, h2, h3, h4, h5, h6, .font-headline, .font-display {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
 }
 
-::selection {
-  background: rgba(232, 189, 58, 0.3);
-  color: #ffffff;
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
-* {
-  scrollbar-width: none;
-}
-
-/* ========================================
-   Dark Mode Luxe Glass Morphism
-   ======================================== */
-.luxe-glass {
-  background: rgba(255, 255, 255, 0.05); /* Extremely sheer white */
-  backdrop-filter: blur(28px) saturate(200%); /* Massive blur to catch light behind */
-  -webkit-backdrop-filter: blur(28px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.14); /* Frosty edge */
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-  border-radius: 2rem;
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Optional soft specular highlight inside glass */
-.luxe-glass::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 2rem;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-/* ========================================
-   Product Cards (Glass)
-   ======================================== */
-.glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08); 
-  border-radius: 2rem;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
-  position: relative;
-}
-
-.glass-card:hover {
-  background: rgba(255, 255, 255, 0.08); /* Brighter glass on hover */
-  transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-/* ========================================
-   Floating Elements & Blobs
-   ======================================== */
-.blob-shape {
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-  animation: morphBlob 15s ease-in-out infinite both alternate;
-}
-
-@keyframes morphBlob {
-  0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-}
-
-/* ========================================
-   Product Image Zoom
-   ======================================== */
-.image-zoom {
-  transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.6)); /* Heavy dark shadow */
-}
-
-.glass-card:hover .image-zoom {
-  transform: scale(1.06);
-}
-
-/* ========================================
-   Price & Nutritional Overlays
-   ======================================== */
-.price-tag-glass {
-  background: rgba(232, 189, 58, 0.9); /* Gold block on dark */
-  color: #0d211b; /* Dark text */
-  padding: 0.5rem 1.25rem;
-  border-radius: 999px;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.125rem;
-  box-shadow: 0 4px 12px rgba(232, 189, 58, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  transition: all 0.3s ease;
-}
-
-.glass-card:hover .price-tag-glass {
-  background: #fccc4c;
-  box-shadow: 0 8px 24px rgba(252, 204, 76, 0.4);
-}
-
-/* ========================================
-   Buttons
-   ======================================== */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1.25rem 2.75rem;
-  background: var(--color-secondary); /* Premium Gold */
-  color: #0d211b; /* Deep background colored text */
-  font-weight: 800;
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  border-radius: 9999px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 30px rgba(232, 189, 58, 0.2);
-  text-decoration: none;
-  letter-spacing: 0.02em;
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(232, 189, 58, 0.4);
-  background: #fccc4c;
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1.25rem 2.5rem;
-  background: rgba(255, 255, 255, 0.08); /* Frosted on dark */
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--color-foreground);
-  font-weight: 700;
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-/* ========================================
-   Header Glass Pill
-   ======================================== */
-.nav-pill {
-  background: rgba(20, 48, 40, 0.65); /* Deep green frosted */
-  backdrop-filter: blur(28px) saturate(200%);
-  border-radius: 999px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 1rem;
-}
-
-/* ========================================
-   Floating Animation
-   ======================================== */
-@keyframes floating {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
-}
-
-.floating {
-  animation: floating 6s ease-in-out infinite;
-}
-
-/* ========================================
-   Reveal Animations
-   ======================================== */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ========================================
-   Aurora / Prismatic Drift (CSS fallback)
-   ======================================== */
-@keyframes auroraDrift1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(4%, -6%) scale(1.08); }
-  66%       { transform: translate(-3%, 3%) scale(0.97); }
-}
-
-@keyframes auroraDrift2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(-5%, 8%) scale(1.12); }
-  66%       { transform: translate(3%, -4%) scale(0.95); }
-}
-
-@keyframes auroraDrift3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(6%, -4%) scale(0.92); }
-  66%       { transform: translate(-2%, 6%) scale(1.05); }
-}
-
-/* Horizontal content marquee (for banners) */
+/* Marquee animation for ingredient ticker */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -291,9 +54,37 @@ h1, h2, h3, h4, h5, h6, .font-headline, .font-display {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 28s linear infinite;
+  animation: marquee 32s linear infinite;
 }
 
 .marquee-track:hover {
   animation-play-state: paused;
+}
+/* Signature brand pattern - concentric circles */
+.pattern-side-circles {
+  background-color: var(--color-fd-yellow);
+  background-image: 
+    radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.06) 21%, rgba(0,0,0,0.06) 30%, transparent 31%),
+    radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.06) 41%, rgba(0,0,0,0.06) 50%, transparent 51%);
+  background-size: 100% 50px;
+  background-position: center;
+}
+
+/* Kuli Kuli style Arch Card Top */
+.arch-header {
+  border-radius: 20px 20px 50% 50% / 20px 20px 25px 25px;
+}
+
+/* Tribal Background Pattern Strip */
+.tribal-pattern {
+  background-image: 
+    radial-gradient(circle at 100% 50%, transparent 20%, #eb5a2f 21%, #eb5a2f 34%, transparent 35%, transparent),
+    radial-gradient(circle at 0% 50%, transparent 20%, #eb5a2f 21%, #eb5a2f 34%, transparent 35%, transparent);
+  background-size: 40px 40px;
+  background-color: #f8ba16;
+}
+
+/* Organic Semi-circle Background for Pillars */
+.semi-circle-bg {
+  border-radius: 0 0 100px 100px;
 }

@@ -56,6 +56,6 @@ export const heroImages = {
 export function getProductImage(slug: string): { main: string; alt: string } {
   return productImages[slug] || {
     main: heroImages.main,
-    alt: 'FreezeDance product',
+    alt: 'FreezeDelights product',
   };
 }

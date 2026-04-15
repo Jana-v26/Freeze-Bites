@@ -28,7 +28,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    value: 'support@freezedance.com',
+    value: 'support@freezedelights.in',
     desc: 'We reply within 24 hours',
   },
   {
@@ -320,7 +320,7 @@ export default function ContactPage() {
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4">
                 <MapPin className="w-7 h-7 text-[#171717]" />
               </div>
-              <h3 className="text-lg font-bold text-[#171717] mb-2">FreezeDance HQ</h3>
+              <h3 className="text-lg font-bold text-[#171717] mb-2">FreezeDelights HQ</h3>
               <p className="text-[#6B7280] text-sm text-center leading-relaxed max-w-xs">
                 Hyderabad, Telangana, India - 500001
               </p>
@@ -363,7 +363,7 @@ export default function ContactPage() {
             <p className="text-[#6B7280] text-sm">
               Still have questions?{' '}
               <a
-                href="mailto:support@freezedance.com"
+                href="mailto:support@freezedelights.in"
                 className="text-[#171717] font-semibold hover:underline"
               >
                 Email our support team
