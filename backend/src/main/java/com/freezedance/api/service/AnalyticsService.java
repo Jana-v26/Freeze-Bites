@@ -23,17 +23,18 @@ public class AnalyticsService {
 
     @Transactional(readOnly = true)
     public AnalyticsResponse getDashboardAnalytics() {
-        BigDecimal totalRevenue = orderRepository.findTotalRevenue();
-        Long totalOrders = orderRepository.count();
-        Long totalCustomers = userRepository.count();
-        Long totalProducts = productRepository.count();
-
         LocalDateTime startOfWeek = LocalDateTime.now()
                 .with(WeekFields.of(Locale.getDefault()).dayOfWeek(), 1)
                 .withHour(0).withMinute(0).withSecond(0).withNano(0);
 
-        BigDecimal revenueThisWeek = orderRepository.findRevenueAfter(startOfWeek);
-        Long ordersThisWeek = orderRepository.countByCreatedAtAfter(startOfWeek);
+        LocalDateTime epochStart = LocalDateTime.of(2000, 1, 1, 0, 0);
+        BigDecimal totalRevenue = orderRepository.totalRevenueSince(epochStart);
+        Long totalOrders = orderRepository.count();
+        Long totalCustomers = userRepository.count();
+        Long totalProducts = productRepository.count();
+
+        BigDecimal revenueThisWeek = orderRepository.totalRevenueSince(startOfWeek);
+        Long ordersThisWeek = orderRepository.countOrdersSince(startOfWeek);
 
         return AnalyticsResponse.builder()
                 .totalRevenue(totalRevenue != null ? totalRevenue : BigDecimal.ZERO)

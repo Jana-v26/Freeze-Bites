@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/account/', '/checkout/', '/admin/'],
     },
-    sitemap: 'https://freezedance.com/sitemap.xml',
+    sitemap: 'https://freezedelights.in/sitemap.xml',
   };
 }

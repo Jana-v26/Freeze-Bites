@@ -3,7 +3,7 @@ package com.freezedance.api.service;
 import com.freezedance.api.exception.BadRequestException;
 import com.freezedance.api.exception.ResourceNotFoundException;
 import com.freezedance.api.model.Order;
-import com.freezedance.api.model.OrderStatus;
+import com.freezedance.api.model.enums.OrderStatus;
 import com.freezedance.api.model.Payment;
 import com.freezedance.api.repository.OrderRepository;
 import com.freezedance.api.repository.PaymentRepository;

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./mvnw -DskipTests clean package -f backend/pom.xml)",
+      "Bash(./mvnw -DskipTests clean package)"
+    ]
+  }
+}

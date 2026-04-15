@@ -1,696 +1,366 @@
 'use client';
 
-import { useRef } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import {
-  ArrowRight,
-  Play,
-  ShieldCheck,
-  Globe,
-  Package,
-  Verified,
-} from 'lucide-react';
-
-// ── Image URLs (Local & Remote) ──
+import { Star, Instagram, Facebook } from 'lucide-react';
 import { productImages } from '@/lib/images';
 
-// ── Product data ──
-const fruits = [
+// ─── Product category cards ───────────────────────────────────────────────
+const categories = [
   {
-    name: 'Mango Cubes',
-    slug: 'mango-cubes',
-    description: 'Golden super-sweet cubes for premium snacking.',
+    name: 'Pure Freeze-Dried\nMango Cubes',
+    href: '/shop/mango-cubes',
+    bg: 'var(--color-cat-teal)', // Teal arch
     image: productImages['mango-cubes'].main,
-    tags: ['Top Seller', 'Pure'],
-    price: '₹249',
-    nutritional: [
-      { label: 'Vitamin A', value: '45%' },
-      { label: 'Dietary Fiber', value: '3.2g' },
-    ],
+    alt: 'Mango Cubes',
   },
   {
-    name: 'Pineapple Cubes',
-    slug: 'pineapple-cubes',
-    description: 'Tropical tangy cubes, vibrant and refreshing.',
-    image: productImages['pineapple-cubes'].main,
-    tags: ['Vitamin C', 'Tangy'],
-    price: '₹279',
-    nutritional: [
-      { label: 'Vitamin C', value: 'High' },
-      { label: 'Digestion', value: 'Bromelain' },
-    ],
+    name: 'Tropical\nFruit Blends',
+    href: '/shop?category=blends',
+    bg: 'var(--color-cat-pink)', // Pink arch
+    image: productImages['pineapple-cubes'].main, // Placeholder for blend
+    alt: 'Fruit Blends',
   },
   {
-    name: 'Jackfruit Cubes',
-    slug: 'jackfruit-cubes',
-    description: 'Sweet and exotic tropical bites.',
-    image: productImages['jackfruit-cubes'].main,
-    tags: ['Exotic', 'High Energy'],
-    price: '₹319',
-    nutritional: [
-      { label: 'Vitamin C', value: 'Good' },
-      { label: 'Potassium', value: 'Rich' },
-    ],
-  },
-  {
-    name: 'Black Plum (Jamun)',
-    slug: 'jamun-cubes',
-    description: 'Exotic purple power bites packed with antioxidants.',
-    image: productImages['jamun-cubes'].main,
-    tags: ['Antioxidant', 'Wild Harvest'],
-    price: '₹299',
-    nutritional: [
-      { label: 'Anthocyanins', value: 'Exceptional' },
-      { label: 'Iron Content', value: 'Rich' },
-    ],
-  },
-  {
-    name: 'Banana Crisp',
-    slug: 'banana-cubes',
-    description: 'Naturally sweet slices with a delicate crunch.',
-    image: productImages['banana-cubes'].main,
-    tags: ['Energy Boost', 'Potassium'],
-    price: '₹199',
-    nutritional: [
-      { label: 'Potassium', value: '360mg' },
-      { label: 'Energy Density', value: 'High' },
-    ],
-  },
-];
-
-const powders = [
-  {
-    name: 'Pure Moringa',
-    slug: 'moringa-powder',
-    description: 'Bright green life force.',
+    name: 'Organic Superfood\nPowders',
+    href: '/shop/moringa-powder',
+    bg: 'var(--color-cat-blue)', // Blue arch
     image: productImages['moringa-powder'].main,
-    hoverText: '99.8% Purity Index',
-    price: '₹399',
+    alt: 'Moringa Powder',
   },
   {
-    name: 'Watermelon Splash',
-    slug: 'watermelon-powder',
-    description: 'Summery hydration.',
-    image: productImages['watermelon-powder'].main,
-    hoverText: 'Instant Solubility',
-    price: '₹449',
-  },
-  {
-    name: 'Zesty Lemon',
-    slug: 'lemon-powder',
-    description: 'Sunny citrus joy.',
-    image: productImages['lemon-powder'].main,
-    hoverText: 'Vitamin C Focus',
-    price: '₹349',
-  },
-  {
-    name: 'Pineapple Powder',
-    slug: 'pineapple-powder',
-    description: 'Tropical tangy boost.',
-    image: productImages['pineapple-powder'].main,
-    hoverText: 'Great for mixing',
-    price: '₹299',
+    name: 'Superfood\nAntioxidant Bites',
+    href: '/shop/jamun-cubes',
+    bg: 'var(--color-cat-berry)', // Berry arch
+    image: productImages['jamun-cubes'].main,
+    alt: 'Jamun Bites',
   },
 ];
 
-// ── Animated section wrapper ──
-function AnimatedSection({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
+// ─── Pillar cards (Organic layout) ─────────────────────────────────────────
+const pillars = [
+  {
+    title: 'Scientifically Super',
+    desc: 'Our superfood plants are nutritional powerhouses that are packed with potent nutrients and scientifically-proven efficacy.',
+    image: '/images/products/moringa-powder.png', // Needs a raw leaf image ideally
+    alt: 'Moringa Leaf',
+    bg: '#5ab2a1', // Teal semi-circle
+  },
+  {
+    title: 'Climate Smart',
+    desc: "Our fruits are grown with a focus on regenerative agriculture and are sustainably sourced from our worldwide partners.",
+    image: '/images/products/mango-cubes.png', // Needs a raw pod/fruit image
+    alt: 'Raw Fruit',
+    bg: '#c5d836', // Lime semi-circle
+  },
+  {
+    title: 'Community Grown',
+    desc: 'Working with growers in small communities builds brighter futures through equitable trade, collaboration, and impactful growth.',
+    image: '/images/products/jamun-cubes.png', // Needs a farmer/community image
+    alt: 'Community Farmer',
+    bg: '#eb5a2f', // Orange semi-circle
+  },
+];
+
+// ─── Ingredient marquee items ──────────────────────────────────────────────
+const ingredients = [
+  'MANGO', 'PINEAPPLE', 'JACKFRUIT', 'JAMUN', 'BANANA',
+  'MORINGA', 'WATERMELON', 'LEMON', 'SPIRULINA', 'GINGER',
+];
+const marqueeItems = [...ingredients, ...ingredients];
+
+// ─── Email signup block ──────────────────────────────────────────────────
+function EmailSignup() {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setEmail('');
+  };
+
   return (
-    <motion.section
-      ref={ref}
-      initial={{ opacity: 0, y: 32 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.section>
+    <div className="bg-white rounded-3xl p-10 sm:p-14 text-center max-w-4xl mx-auto shadow-sm">
+      <h2 className="font-display font-extrabold text-2xl sm:text-4xl text-[var(--color-fd-green)] mb-4">
+        Get 15% Off On Us
+      </h2>
+      <p className="text-[var(--color-fd-text-muted)] text-sm sm:text-base mb-8 leading-relaxed max-w-lg mx-auto">
+        Share your email to get 15% off your first order. We&apos;ll also keep
+        you posted about promotions, new products, and tasty new ways to enjoy superfoods.
+      </p>
+      {submitted ? (
+        <p className="text-[var(--color-fd-green)] font-semibold text-lg">
+          🎉 Thanks! Check your inbox for your discount code.
+        </p>
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto"
+        >
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            required
+            className="flex-1 border-2 border-[var(--color-fd-green)]/20 rounded-full px-6 py-3.5 text-sm outline-none focus:border-[var(--color-fd-green)] transition-colors"
+          />
+          <button
+            type="submit"
+            className="border-2 border-[var(--color-fd-green)] text-[var(--color-fd-green)] font-bold px-10 py-3.5 rounded-full text-sm hover:bg-[var(--color-fd-green)] hover:text-white transition-colors"
+          >
+            Submit
+          </button>
+        </form>
+      )}
+    </div>
   );
 }
 
-// ── Main page ──
 export default function HomePage() {
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: heroScroll } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
-  const heroProductY = useTransform(heroScroll, [0, 1], ['0%', '-18%']);
-  const heroProductScale = useTransform(heroScroll, [0, 1], [1, 1.06]);
-
   return (
-    <div className="bg-[var(--color-background)] min-h-screen relative">
+    <div className="bg-[var(--color-fd-green)] text-[var(--color-fd-text)]">
       
-      {/* Aurora / Prismatic Drifting Background (Site-wide) */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <motion.div
-          animate={{ x: ['0%', '4%', '-2%', '0%'], y: ['0%', '-6%', '3%', '0%'], scale: [1, 1.08, 0.97, 1] }}
-          transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-[-5%] left-[-10%] w-[50rem] h-[50rem] bg-[#a7f3d0] opacity-[0.14] blur-[130px] rounded-full"
-        />
-        <motion.div
-          animate={{ x: ['0%', '-5%', '3%', '0%'], y: ['0%', '8%', '-4%', '0%'], scale: [1, 1.12, 0.95, 1] }}
-          transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
-          className="absolute top-[20%] right-[-15%] w-[60rem] h-[60rem] bg-[#fccc4c] opacity-[0.10] blur-[150px] rounded-full"
-        />
-        <motion.div
-          animate={{ x: ['0%', '6%', '-3%', '0%'], y: ['0%', '-4%', '6%', '0%'], scale: [1, 0.92, 1.05, 1] }}
-          transition={{ duration: 19, repeat: Infinity, ease: 'easeInOut', delay: 8 }}
-          className="absolute bottom-[-10%] left-[20%] w-[40rem] h-[40rem] bg-[#34d399] opacity-[0.12] blur-[120px] rounded-full"
-        />
-        {/* Extra violet/cyan prismatic layer */}
-        <motion.div
-          animate={{ x: ['0%', '-3%', '5%', '0%'], y: ['0%', '5%', '-7%', '0%'], scale: [1, 1.05, 0.98, 1] }}
-          transition={{ duration: 32, repeat: Infinity, ease: 'easeInOut', delay: 12 }}
-          className="absolute top-[50%] left-[40%] w-[45rem] h-[45rem] bg-[#818cf8] opacity-[0.07] blur-[160px] rounded-full"
-        />
+      {/* ── Banner/Promo bar ── */}
+      <div className="bg-[var(--color-fd-green-mid)] text-white text-center text-xs py-2 uppercase tracking-widest font-semibold border-b border-white/10">
+        #1 FREEZE-DRIED FRUIT BRAND IN INDIA WITH MORE THAN 1 MILLION HAPPY CUSTOMERS
       </div>
 
-      {/* ═══════════════════════════════════════
-          HERO SECTION
-         ═══════════════════════════════════════ */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center w-full pt-28 pb-16">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-0 relative z-10">
-          {/* Floating sparkle particles */}
-          {[
-            { top: '15%', left: '8%',  size: 6,  dur: 4.2, delay: 0   },
-            { top: '72%', left: '12%', size: 4,  dur: 5.8, delay: 1.1 },
-            { top: '35%', left: '52%', size: 5,  dur: 3.9, delay: 0.6 },
-            { top: '60%', left: '78%', size: 7,  dur: 6.1, delay: 1.8 },
-            { top: '20%', left: '88%', size: 4,  dur: 4.7, delay: 2.3 },
-            { top: '85%', left: '65%', size: 5,  dur: 5.2, delay: 0.9 },
-          ].map((p, i) => (
-            <motion.div
-              key={i}
-              className="absolute pointer-events-none rounded-full bg-[var(--color-secondary)] z-10"
-              style={{ top: p.top, left: p.left, width: p.size, height: p.size }}
-              animate={{ y: [0, -18, 0], opacity: [0.5, 1, 0.5], scale: [1, 1.4, 1] }}
-              transition={{ duration: p.dur, repeat: Infinity, ease: 'easeInOut', delay: p.delay }}
-            />
-          ))}
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-            {/* Left column */}
-            <div className="z-10 relative">
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="inline-flex items-center gap-2 luxe-glass px-5 py-2.5 mb-8"
-              >
-                <ShieldCheck className="w-4 h-4 text-[var(--color-primary)] opacity-90" />
-                <span className="text-xs uppercase tracking-[0.2em] font-extrabold text-[var(--color-primary)]">
-                  Premium Quality Exports
-                </span>
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2, type: 'spring', bounce: 0.4 }}
-                className="text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-[var(--color-foreground)] leading-[1.05] font-display"
-              >
-                Nature&apos;s Essence,{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[#8bcdae]">Freeze-Dried</span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.35 }}
-                className="text-lg md:text-xl text-[var(--color-on-surface-variant)] font-medium mt-8 max-w-lg leading-relaxed"
-              >
-                We bridge the gap between tropical orchards and international markets with premium freeze-dried products — preserving 97% of nature&apos;s goodness in every bite.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="mt-10 flex flex-wrap items-center gap-4"
-              >
-                <Link href="/shop" className="btn-primary">
-                  Explore Catalogue
-                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-                </Link>
-                <button className="btn-secondary">
-                   <Play className="w-4 h-4 mr-2 opacity-80" />
-                   Process Film
-                </button>
-              </motion.div>
-
-              {/* Social proof row */}
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-                className="mt-8 flex items-center gap-4"
-              >
-                <div className="flex -space-x-2.5">
-                  {['#E8B54F','#7DD0A4','#F4A261','#4EC9A8','#F9D06B'].map((color, i) => (
-                    <div key={i} className="w-8 h-8 rounded-full border-2 border-[var(--color-background)] flex items-center justify-center text-xs font-bold text-[#0d211b]" style={{ background: color }} />
-                  ))}
-                </div>
-                <div className="border-l border-white/15 pl-4">
-                  <div className="flex gap-0.5 text-[var(--color-secondary)] text-sm leading-none mb-1">
-                    {'★★★★★'}
-                  </div>
-                  <p className="text-[11px] font-semibold text-[var(--color-on-surface-variant)]">
-                    Loved by <span className="text-[var(--color-foreground)] font-extrabold">12,000+</span> health enthusiasts
-                  </p>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Right column — Parallax "Family Bundle" lineup */}
-            <motion.div
-              style={{ y: heroProductY, scale: heroProductScale }}
-              className="relative hidden lg:flex items-center justify-center z-10 w-full max-w-2xl mx-auto h-[650px] mt-12 bg-transparent overflow-visible"
-            >
-              
-              {/* Massive Stylized Background Text Layer (SWEET-style inspiration) */}
-              <div className="absolute inset-x-0 inset-y-0 flex flex-col items-center justify-center select-none pointer-events-none z-0 opacity-[0.03]">
-                <motion.h2
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1, delay: 0.2 }}
-                  className="font-display font-black text-[16rem] leading-[0.75] tracking-tighter text-white drop-shadow-[0_0_80px_rgba(255,255,255,0.1)] uppercase whitespace-nowrap"
-                >
-                  Freeze
-                </motion.h2>
-                <motion.h2
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1, delay: 0.4 }}
-                  className="font-display font-black text-[16rem] leading-[0.75] tracking-tighter text-white drop-shadow-[0_0_80px_rgba(255,255,255,0.1)] uppercase whitespace-nowrap"
-                >
-                  Dance
-                </motion.h2>
-              </div>
-
-              {/* Product Bundle — High Clarity Static Cluster */}
-              <div className="relative w-full h-full flex items-center justify-center z-10">
-                
-                {/* Back Left — Pineapple (Tucked Behind) */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, x: -80, rotate: -10 }}
-                  animate={{ opacity: 1, scale: 1, x: -90, rotate: -12 }}
-                  transition={{ duration: 0.8, delay: 0.5, type: 'spring', bounce: 0.3 }}
-                  whileHover={{ scale: 1.05, rotate: -5, zIndex: 45 }}
-                  className="absolute left-[15%] bottom-[150px] w-56 aspect-[4/5] bg-white/[0.06] backdrop-blur-xl rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.7)] border border-white/15 p-2 z-20 cursor-pointer overflow-hidden transition-all duration-300"
-                >
-                  <div className="relative w-full h-full overflow-hidden">
-                    <Image
-                      src={productImages['pineapple-cubes'].main}
-                      alt="Pineapple Cubes"
-                      fill
-                      className="object-contain p-2 hover:scale-105 transition-transform duration-500"
-                      priority
-                    />
-                  </div>
-                </motion.div>
-
-                {/* Back Right — Banana (Tucked Behind) */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, x: 80, rotate: 10 }}
-                  animate={{ opacity: 1, scale: 1, x: 90, rotate: 12 }}
-                  transition={{ duration: 0.8, delay: 0.6, type: 'spring', bounce: 0.3 }}
-                  whileHover={{ scale: 1.05, rotate: 5, zIndex: 45 }}
-                  className="absolute right-[15%] bottom-[160px] w-52 aspect-[4/5] bg-white/[0.06] backdrop-blur-xl rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.7)] border border-white/15 p-2 z-20 cursor-pointer overflow-hidden transition-all duration-300"
-                >
-                  <div className="relative w-full h-full overflow-hidden">
-                    <Image
-                      src={productImages['banana-cubes'].main}
-                      alt="Banana Cubes"
-                      fill
-                      className="object-contain p-2 hover:scale-105 transition-transform duration-500"
-                      priority
-                    />
-                  </div>
-                </motion.div>
-
-                {/* Center Primary — Mango (Hero Product) */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, y: 100 }}
-                  animate={{ opacity: 1, scale: 1, y: 0, rotate: -2 }}
-                  transition={{ duration: 1, delay: 0.3, type: 'spring', bounce: 0.4 }}
-                  whileHover={{ scale: 1.1, rotate: 0, zIndex: 50 }}
-                  className="absolute left-1/2 -translate-x-1/2 bottom-12 w-64 aspect-[4/5] bg-white/[0.08] backdrop-blur-2xl rounded-[2.5rem] shadow-[0_40px_100px_rgba(0,0,0,0.9)] border border-white/20 p-4 z-40 cursor-pointer overflow-hidden transition-all duration-300"
-                >
-                  <div className="relative w-full h-full overflow-hidden flex items-center justify-center">
-                    <Image
-                      src={productImages['mango-cubes'].main}
-                      alt="Mango Cubes"
-                      fill
-                      className="object-contain p-2 hover:scale-110 transition-transform duration-500"
-                      priority
-                    />
-                    <div className="absolute top-4 left-4 z-10">
-                      <span className="text-[11px] uppercase tracking-widest font-black text-white bg-[var(--color-primary)] px-3 py-1.5 rounded-full shadow-lg">
-                        Best Seller
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Foreground — Moringa Sachet (Leaning Front) */}
-                <motion.div
-                  initial={{ opacity: 0, x: 100, y: 100, rotate: 35 }}
-                  animate={{ opacity: 1, x: 0, y: 0, rotate: 22 }}
-                  transition={{ duration: 1, delay: 0.7, type: 'spring', bounce: 0.3 }}
-                  whileHover={{ scale: 1.25, rotate: 10, zIndex: 60 }}
-                  className="absolute bottom-20 right-[10%] w-32 aspect-[3/4] bg-white/[0.06] backdrop-blur-xl rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.7)] border border-white/15 p-2.5 z-55 cursor-pointer overflow-hidden transition-all duration-300"
-                >
-                  <div className="relative w-full h-full overflow-hidden">
-                    <Image
-                      src={productImages['moringa-powder'].main}
-                      alt="Moringa Powder"
-                      fill
-                      className="object-contain p-1 hover:scale-110 transition-transform duration-500"
-                      priority
-                    />
-                  </div>
-                </motion.div>
-
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════
-          TRUST MARQUEE TICKER
-         ═══════════════════════════════════════ */}
-      <div className="relative z-10 border-y border-white/10 bg-white/[0.04] backdrop-blur-sm overflow-hidden py-4">
-        <div className="marquee-track">
-          {[0, 1].map((rep) => (
-            <div key={rep} className="flex items-center shrink-0">
-              {[
-                'FREE SHIPPING OVER ₹499',
-                'ISO 22000 CERTIFIED',
-                '97% NUTRIENTS PRESERVED',
-                '30-DAY MONEY BACK',
-                'ZERO ADDITIVES EVER',
-                '12,000+ HAPPY CUSTOMERS',
-                'FREEZE-DRIED NOT FRIED',
-                'FARM TO PACK IN 48 HRS',
-              ].map((item) => (
-                <span key={item} className="flex items-center gap-3 px-8 text-[11px] font-extrabold tracking-[0.2em] text-[var(--color-primary)] uppercase whitespace-nowrap">
-                  <span className="text-[var(--color-secondary)] text-base leading-none">◆</span>
-                  {item}
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════
-          APPLE-STYLE PROOF POINTS / STATS BAR
-         ═══════════════════════════════════════ */}
-      <section className="py-16 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="luxe-glass px-8 md:px-16 py-12 border border-[var(--color-outline-variant)]"
-          >
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-0 md:divide-x md:divide-white/10">
-              {([
-                { number: '97%', label: 'Nutrients Preserved', sub: 'vs. 40% in sun-dried' },
-                { number: '0',   label: 'Additives',           sub: 'Zero preservatives, ever' },
-                { number: '2yr', label: 'Shelf Life',          sub: 'Without refrigeration' },
-                { number: 'ISO', label: '22000 Certified',     sub: 'Global quality standard' },
-              ] as const).map((stat, i) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.12, type: 'spring', bounce: 0.35 }}
-                  className="flex flex-col items-center text-center px-4"
-                >
-                  <span className="font-display font-black text-5xl md:text-6xl xl:text-7xl text-[var(--color-foreground)] tracking-tight leading-none">
-                    {stat.number}
-                  </span>
-                  <span className="text-[var(--color-primary)] font-bold text-xs uppercase tracking-[0.18em] mt-3">
-                    {stat.label}
-                  </span>
-                  <span className="text-xs text-[var(--color-on-surface-variant)] mt-1.5 font-medium">
-                    {stat.sub}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════
-          SIGNATURE FRUIT COLLECTION (Glass Cards)
-         ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-24 relative z-10">
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-          
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
-            <div>
-              <p className="text-sm font-extrabold text-[var(--color-secondary)] uppercase tracking-[0.2em] mb-3 drop-shadow-sm">Premium Tier</p>
-              <h2 className="font-display text-4xl md:text-5xl font-extrabold text-[var(--color-foreground)] tracking-tight">
-                Signature Collection
-              </h2>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {fruits.map((product, i) => (
-              <motion.div
-                key={product.slug}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.6, delay: i * 0.1, type: "spring", bounce: 0.3 }}
-              >
-                <Link href={`/shop/${product.slug}`} className="block h-full cursor-pointer group">
-                  <div className="glass-card h-full min-h-[520px] flex flex-col p-6 border border-[var(--color-outline-variant)]">
-                    
-                    {/* Header */}
-                    <div className="flex justify-between items-start mb-6 z-10 text-[var(--color-foreground)]">
-                       <span className="font-display font-bold text-2xl tracking-tight drop-shadow-md">
-                         {product.name}
-                       </span>
-                    </div>
-
-                    {/* Price Pill Glass */}
-                    <div className="absolute top-6 right-6 z-20">
-                      <div className="price-tag-glass font-display tracking-tight hover:scale-105">
-                        {product.price}
-                      </div>
-                    </div>
-
-                    {/* Image Container */}
-                    <div className="relative flex-grow flex items-center justify-center w-full mb-6 mt-4">
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        unoptimized
-                        className="object-contain image-zoom"
-                      />
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[var(--color-background)] via-[var(--color-background)]/90 to-transparent p-6 pt-16 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none rounded-b-xl z-10 flex flex-col justify-end">
-                        <div className="space-y-3">
-                          {product.nutritional.map((item) => (
-                            <div key={item.label} className="flex justify-between items-center text-[var(--color-foreground)] border-b border-white/10 pb-1.5 last:border-0">
-                              <span className="text-xs uppercase tracking-wider font-bold opacity-80">{item.label}</span>
-                              <span className="text-sm font-extrabold text-[var(--color-primary)] tracking-wide">{item.value}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Footer Details */}
-                    <div className="luxe-glass p-4 mt-auto rounded-xl border border-[var(--color-outline-variant)]">
-                      <p className="text-sm text-[var(--color-on-surface-variant)] font-medium leading-relaxed mb-4">{product.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {product.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-xs font-bold px-3 py-1.5 rounded-full bg-white/10 text-[var(--color-foreground)] border border-white/10"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* ═══════════════════════════════════════
-          NUTRIENT-DENSE MICRO-POWDERS
-         ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-24 relative overflow-hidden z-10">
+      {/* ════════════════════════════════════════
+          1. HERO (Vibrant Yellow Billboard Layout)
+      ════════════════════════════════════════ */}
+      <section className="bg-[var(--color-fd-yellow)] relative mt-4 mx-4 sm:mx-6 rounded-t-xl overflow-hidden pt-16 pb-24 px-6 text-center shadow-lg">
+        {/* Decorative side pattern strips */}
+        <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 pattern-side-circles opacity-60 mix-blend-multiply pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 pattern-side-circles opacity-60 mix-blend-multiply pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-16">
-            <p className="text-sm font-extrabold text-[var(--color-secondary)] uppercase tracking-[0.2em] mb-3 drop-shadow-sm">Concentrates</p>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-foreground)] tracking-tight font-display">
-              Nutrient-Dense Micro-Powders
+        <div className="relative z-10 max-w-5xl mx-auto">
+          <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl text-[var(--color-fd-green)] mb-8 tracking-tight">
+            Introducing Our Newest Products
+          </h1>
+          <Link
+            href="/shop"
+            className="inline-block bg-white text-[var(--color-fd-green)] font-black px-10 py-4 rounded-full text-sm hover:scale-105 transition-transform shadow-md"
+          >
+            SHOP NOW
+          </Link>
+
+          {/* Product Cluster */}
+          <div className="mt-16 sm:mt-24 relative h-[350px] sm:h-[450px] lg:h-[500px] w-full flex items-end justify-center pointer-events-none pb-0 max-w-full overflow-hidden sm:overflow-visible gap-2 sm:gap-4 lg:gap-6">
+            {/* Floating raw ingredients accent - left */}
+            <div className="absolute left-[5%] bottom-20 w-48 h-48 opacity-50 z-0 pointer-events-none hidden sm:block">
+               <div className="w-full h-full bg-[var(--color-fd-orange)] rounded-full blur-[60px] mix-blend-overlay" />
+            </div>
+            {/* Floating raw ingredients accent - right */}
+            <div className="absolute right-[10%] bottom-32 w-40 h-40 opacity-40 z-0 pointer-events-none hidden sm:block">
+               <div className="w-full h-full bg-[var(--color-fd-lime)] rounded-full blur-[50px] mix-blend-overlay" />
+            </div>
+
+            {/* Product 1: Far left */}
+            <div className="relative w-24 sm:w-40 lg:w-56 aspect-[3/4] z-10 origin-bottom opacity-90">
+               <Image src={productImages['pineapple-cubes'].main} alt="Pineapple Cubes" fill className="object-contain drop-shadow-xl object-bottom" unoptimized/>
+            </div>
+            
+            {/* Product 2: Middle left */}
+            <div className="relative w-24 sm:w-40 lg:w-56 aspect-[3/4] z-20 origin-bottom">
+               <Image src={productImages['mango-cubes'].main} alt="Mango Cubes" fill className="object-contain drop-shadow-2xl object-bottom" unoptimized/>
+            </div>
+            
+            {/* Product 3: Center Front */}
+            <div className="relative w-24 sm:w-40 lg:w-56 aspect-[3/4] z-30 origin-bottom">
+               <Image src={productImages['moringa-powder'].main} alt="Moringa Powder" fill className="object-contain drop-shadow-2xl object-bottom" unoptimized/>
+            </div>
+            
+            {/* Product 4: Middle Right */}
+            <div className="relative w-24 sm:w-40 lg:w-56 aspect-[3/4] z-20 origin-bottom">
+               <Image src={productImages['jamun-cubes'].main} alt="Jamun Cubes" fill className="object-contain drop-shadow-2xl object-bottom" unoptimized/>
+            </div>
+            
+            {/* Product 5: Far Right */}
+            <div className="relative w-24 sm:w-40 lg:w-56 aspect-[3/4] z-10 origin-bottom opacity-90">
+               <Image src={productImages['pineapple-powder'].main} alt="Pineapple Powder" fill className="object-contain drop-shadow-xl object-bottom" unoptimized/>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+          2. PRODUCT CATEGORIES (Arch Cards)
+      ════════════════════════════════════════ */}
+      <section className="bg-[var(--color-fd-green)] py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-12 gap-4">
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[var(--color-fd-lime)]">
+              Superfoods Your Way
             </h2>
+            <Link
+              href="/shop"
+              className="text-[var(--color-fd-lime)] hover:text-white font-semibold text-sm underline underline-offset-8 transition-colors"
+            >
+              View all products
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {powders.map((powder, i) => (
-              <motion.div
-                key={powder.slug}
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.6, delay: i * 0.1, type: "spring", bounce: 0.3 }}
-                className="group cursor-pointer"
-              >
-                <div className="glass-card p-5 flex flex-col h-full min-h-[380px] border border-[var(--color-outline-variant)] hover:border-[var(--color-primary)]/40 transition-colors">
-                  <div className="flex justify-between items-start mb-4 z-10">
-                     <span className="text-sm font-bold text-[var(--color-primary)] tracking-wider opacity-90">{powder.price}</span>
-                  </div>
-                  
-                  <div className="aspect-square relative flex-grow mb-4 flex items-center justify-center">
-                    <Image
-                      src={powder.image}
-                      alt={powder.name}
-                      fill
-                      unoptimized
-                      className="object-contain image-zoom"
-                    />
-                  </div>
-                  
-                  <div className="luxe-glass p-3 text-center rounded-xl border border-white/5">
-                    <h3 className="text-base font-bold text-[var(--color-foreground)] font-display tracking-tight">{powder.name}</h3>
-                    <p className="text-xs text-[var(--color-on-surface-variant)] mt-1">{powder.description}</p>
-                  </div>
+            {categories.map((cat) => (
+              <div key={cat.name} className="bg-[var(--color-fd-cream)] rounded-2xl flex flex-col items-center">
+                
+                {/* Arch Header */}
+                <div 
+                  className="w-full pt-8 pb-32 px-4 arch-header mt-3 mx-3 text-center text-white"
+                  style={{ backgroundColor: cat.bg, width: 'calc(100% - 24px)' }}
+                >
+                  <h3 className="font-display font-bold text-lg leading-tight whitespace-pre-line drop-shadow-sm">
+                    {cat.name}
+                  </h3>
                 </div>
-              </motion.div>
+
+                {/* Product Image overlapping arch */}
+                <div className="relative w-48 h-64 -mt-28 mb-4">
+                  <Image
+                    src={cat.image}
+                    alt={cat.alt}
+                    fill
+                    className="object-contain drop-shadow-xl hover:scale-105 transition-transform duration-300"
+                    unoptimized
+                  />
+                </div>
+
+                {/* CTA Button */}
+                <div className="w-full px-6 pb-6 mt-auto">
+                  <Link
+                    href={cat.href}
+                    className="block w-full text-center bg-[var(--color-fd-green)] text-white font-bold py-3.5 rounded-full text-sm hover:bg-[var(--color-fd-green-mid)] transition-colors shadow-sm"
+                  >
+                    SHOP
+                  </Link>
+                </div>
+              </div>
             ))}
           </div>
         </div>
-      </AnimatedSection>
+      </section>
 
-      {/* ═══════════════════════════════════════
-          EXPORT INFRASTRUCTURE
-         ═══════════════════════════════════════ */}
-      <AnimatedSection className="py-24 mt-12 mb-12 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          
-          <div className="luxe-glass p-8 md:p-16 rounded-[3rem] border border-[var(--color-outline-variant)] shadow-2xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-              
-              {/* LEFT — Image collage & Core values */}
-              <div className="grid grid-cols-2 gap-6 relative">
-                
-                <div className="space-y-6 relative z-10">
-                  <div className="luxe-glass rounded-3xl h-72 flex flex-col items-center justify-center text-center p-8 border border-[var(--color-outline-variant)] bg-gradient-to-br from-[var(--color-tertiary)] to-[var(--color-background)]">
-                    <div className="w-16 h-16 rounded-full bg-[var(--color-primary)]/10 flex items-center justify-center mb-6">
-                      <Globe className="w-8 h-8 text-[var(--color-primary)]" />
-                    </div>
-                    <h3 className="font-display font-bold text-xl text-[var(--color-foreground)] mb-2">Export Quality</h3>
-                    <p className="text-sm text-[var(--color-on-surface-variant)] leading-relaxed">Supplying premium grade produce to global markets seamlessly.</p>
-                  </div>
-                  <div className="glass-card p-6 flex items-center justify-center text-center">
-                    <p className="font-bold text-[var(--color-foreground)] text-sm uppercase tracking-[0.2em] font-display">Global Reach</p>
+      {/* ════════════════════════════════════════
+          3. TRIBAL EMAIL SIGNUP STRIP
+      ════════════════════════════════════════ */}
+      <section className="relative overflow-hidden py-24 px-6 bg-[var(--color-fd-green)]">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 tribal-pattern opacity-90 mx-4" />
+        
+        <div className="relative z-10">
+          <EmailSignup />
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+          4. BRAND PILLARS (Semi-circle layout)
+      ════════════════════════════════════════ */}
+      <section className="bg-[var(--color-fd-green)] py-24 px-6 border-t border-white/5">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[var(--color-fd-lime)] mb-4">
+            The World&apos;s Most Powerful Fruits
+          </h2>
+          <p className="text-white text-lg sm:text-xl font-medium mb-20 max-w-2xl mx-auto">
+            FreezeDelights turns global superfoods into lasting impact for your body and our planet.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-6">
+            {pillars.map((p) => (
+              <div key={p.title} className="flex flex-col items-center">
+                {/* Semi-circle container with image overlapping */}
+                <div className="relative w-48 h-24 mb-14">
+                  <div 
+                    className="absolute inset-0 semi-circle-bg"
+                    style={{ backgroundColor: p.bg }}
+                  />
+                  <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-48 drop-shadow-xl z-10">
+                     <Image src={p.image} alt={p.alt} fill className="object-contain" unoptimized/>
                   </div>
                 </div>
-                
-                <div className="space-y-6 pt-12 relative z-10">
-                  <div className="glass-card p-6 flex flex-col items-center justify-center text-center">
-                    <div className="w-12 h-12 rounded-full border border-[var(--color-primary)]/30 flex items-center justify-center mb-3 bg-[var(--color-primary)]/10">
-                      <Verified className="w-6 h-6 text-[var(--color-primary)]" />
-                    </div>
-                    <p className="font-bold text-[var(--color-foreground)] text-sm uppercase tracking-wider font-display">Zero Additives</p>
-                  </div>
-                  <div className="luxe-glass rounded-3xl h-64 flex flex-col items-center justify-center p-8 border border-[var(--color-outline-variant)] bg-[var(--color-tertiary)]/70">
-                    <div className="w-16 h-16 rounded-full bg-[var(--color-secondary)]/10 flex items-center justify-center mb-6">
-                      <ShieldCheck className="w-8 h-8 text-[var(--color-secondary)]" />
-                    </div>
-                    <h3 className="font-display font-bold text-xl text-[var(--color-foreground)] mb-2">Certified Pure</h3>
-                    <p className="text-sm text-[var(--color-on-surface-variant)] leading-relaxed text-center">ISO 22000 quality control for maximum unadulterated purity.</p>
-                  </div>
-                </div>
-              </div>
 
-              {/* RIGHT — Text content */}
-              <div>
-                <p className="text-sm font-extrabold text-[var(--color-secondary)] uppercase tracking-[0.2em] mb-4 drop-shadow-md">
-                  Infrastructure
+                <h3 className="font-display font-extrabold text-xl text-[var(--color-fd-lime)] mb-3">
+                  {p.title}
+                </h3>
+                <p className="text-white/90 text-sm leading-relaxed px-4">
+                  {p.desc}
                 </p>
-                <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-foreground)] tracking-tight font-display mb-8">
-                  Built for Maximum Purity.
-                </h2>
-                <p className="text-[var(--color-on-surface-variant)] text-lg leading-relaxed mb-10 font-medium tracking-wide">
-                  Our vertically integrated pipeline ensures every single product reaches your door with uncompromised quality, retaining 97% of its nutritional value and brilliant natural flavor.
-                </p>
-
-                <div className="space-y-8">
-                  {/* Feature 1 */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
-                    className="flex gap-6 group items-start"
-                  >
-                    <div className="flex-shrink-0 w-14 h-14 rounded-2xl luxe-glass border border-[var(--color-outline-variant)] flex items-center justify-center transform group-hover:scale-110 group-hover:bg-[var(--color-primary)]/10 transition-all">
-                      <Package className="w-6 h-6 text-[var(--color-primary)] drop-shadow-sm" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-bold font-display text-[var(--color-foreground)] mb-2 tracking-tight">Cold-Sublimation Tech</h4>
-                      <p className="text-[var(--color-on-surface-variant)] leading-relaxed text-sm font-medium tracking-wide">
-                        Our process locks in vital nutrients, brilliant flavor, and unadulterated natural color deep inside the fruit.
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  {/* Feature 2 */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                    className="flex gap-6 group items-start"
-                  >
-                    <div className="flex-shrink-0 w-14 h-14 rounded-2xl luxe-glass border border-[var(--color-outline-variant)] flex items-center justify-center transform group-hover:scale-110 group-hover:bg-[var(--color-primary)]/10 transition-all">
-                      <Globe className="w-6 h-6 text-[var(--color-primary)] drop-shadow-sm" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-bold font-display text-[var(--color-foreground)] mb-2 tracking-tight">Bespoke White-Label</h4>
-                      <p className="text-[var(--color-on-surface-variant)] leading-relaxed text-sm font-medium tracking-wide">
-                        End-to-end private-label services with custom packaging and rigorous global standards.
-                      </p>
-                    </div>
-                  </motion.div>
-                </div>
               </div>
-            </div>
+            ))}
+          </div>
+
+          <Link
+            href="/about"
+            className="inline-block mt-16 bg-[var(--color-fd-lime)] text-[var(--color-fd-green)] font-extrabold px-12 py-4 rounded-full text-sm hover:scale-105 transition-transform shadow-md tracking-wider uppercase"
+          >
+            OUR INGREDIENTS
+          </Link>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+          5. ABOUT US BOX (Overlapping background)
+      ════════════════════════════════════════ */}
+      <section className="relative overflow-hidden bg-[var(--color-fd-green)]">
+        {/* Ingredient Ticker (Top border) */}
+        <div className="bg-[var(--color-fd-lime)] py-3 overflow-hidden border-y border-[var(--color-fd-green)]/20 z-20 relative">
+          <div className="marquee-track">
+            {marqueeItems.map((item, i) => (
+              <span
+                key={i}
+                className="text-[var(--color-fd-green)] font-display font-medium text-lg tracking-widest px-8 whitespace-nowrap"
+              >
+                {item}
+              </span>
+            ))}
           </div>
         </div>
-      </AnimatedSection>
+
+        {/* Large full width image background */}
+        <div className="relative h-[600px] w-full">
+          <Image
+            src="/images/products/mango-cubes.png" // Placeholder for an actual farm/nature background
+            alt="Farm background"
+            fill
+            className="object-cover object-center opacity-40 mix-blend-luminosity brightness-50"
+            unoptimized
+          />
+          <div className="absolute inset-0 bg-[var(--color-fd-green)]/20" />
+          
+          {/* Floating White Box */}
+          <div className="absolute left-6 md:left-24 top-1/2 -translate-y-1/2 bg-white rounded-[2rem] p-10 md:p-14 max-w-[500px] shadow-2xl z-20">
+            <h2 className="font-display font-extrabold text-3xl text-[var(--color-fd-green)] mb-6 leading-tight">
+              Superfoods for a Superfuture
+            </h2>
+            <p className="text-[var(--color-fd-text)] text-sm mb-10 leading-relaxed font-medium">
+              Starting with the cleanest fruits on the market, we cultivate
+              the world&apos;s most potent superfoods in partnership with small
+              communities of growers. We carefully craft them into delicious
+              cubes, powders, and blends that are packed with positive
+              impact for your body, our growers, and the planet.
+            </p>
+            <Link
+              href="/about"
+              className="inline-block bg-[var(--color-fd-lime)] text-white font-extrabold px-10 py-3.5 rounded-full text-sm hover:bg-[var(--color-fd-lime-dark)] transition-colors shadow-sm"
+            >
+              ABOUT US
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Floating discount badge (Orange) ── */}
+      <Link
+        href="/shop?discount=WELCOME15"
+        className="fixed bottom-6 left-6 z-50 w-[70px] h-[70px] rounded-full bg-[var(--color-fd-orange)] text-white text-center flex flex-col items-center justify-center shadow-2xl hover:scale-105 transition-transform border-[6px] border-[var(--color-fd-green)]"
+      >
+        <span className="text-[10px] font-bold leading-tight">
+          Unlock<br/>15% Off
+        </span>
+      </Link>
+
     </div>
   );
 }

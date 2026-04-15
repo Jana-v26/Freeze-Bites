@@ -38,7 +38,7 @@ export default function PageLoader() {
             transition={{ delay: 0.05, duration: 0.4 }}
             className="font-display text-5xl font-extrabold tracking-tighter text-[#1c1b1b] mb-4"
           >
-            FreezeDance
+            FreezeDelights
           </motion.h1>
 
           {/* Tagline */}

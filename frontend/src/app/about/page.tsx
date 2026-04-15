@@ -124,7 +124,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-[#6B7280] max-w-2xl mx-auto mt-6 leading-relaxed"
           >
-            Born from a passion for preserving nature&apos;s finest, FreezeDance
+            Born from a passion for preserving nature&apos;s finest, FreezeDelights
             brings you the purest form of fruit - crunchy, nutrient-rich, and
             bursting with flavor.
           </motion.p>
@@ -156,7 +156,7 @@ export default function AboutPage() {
                   of fresh fruit. No sugar, no preservatives, no compromise.
                 </p>
                 <p>
-                  Today, FreezeDance partners with organic farms across India,
+                  Today, FreezeDelights partners with organic farms across India,
                   bringing you the crunch of nature in every bite. Our mission is
                   simple: make healthy snacking irresistible.
                 </p>

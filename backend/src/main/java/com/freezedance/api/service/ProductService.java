@@ -29,7 +29,7 @@ public class ProductService {
     private final ReviewRepository reviewRepository;
 
     public Page<ProductResponse> getAllProducts(Pageable pageable) {
-        return productRepository.findAll(pageable).map(this::mapToResponse);
+        return productRepository.findByIsActiveTrue(pageable).map(this::mapToResponse);
     }
 
     public ProductResponse getProductBySlug(String slug) {
@@ -39,19 +39,17 @@ public class ProductService {
     }
 
     public List<ProductResponse> getFeaturedProducts() {
-        return productRepository.findByFeaturedTrue().stream()
+        return productRepository.findByIsFeaturedTrueAndIsActiveTrue().stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
 
     public Page<ProductResponse> getProductsByCategory(String categorySlug, Pageable pageable) {
-        Category category = categoryRepository.findBySlug(categorySlug)
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found with slug: " + categorySlug));
-        return productRepository.findByCategoryId(category.getId(), pageable).map(this::mapToResponse);
+        return productRepository.findByCategorySlugAndIsActiveTrue(categorySlug, pageable).map(this::mapToResponse);
     }
 
     public Page<ProductResponse> searchProducts(String query, Pageable pageable) {
-        return productRepository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(query, query, pageable)
+        return productRepository.search(query, pageable)
                 .map(this::mapToResponse);
     }
 
@@ -64,37 +62,15 @@ public class ProductService {
         product.setName(request.getName());
         product.setSlug(SlugGenerator.toSlug(request.getName()));
         product.setDescription(request.getDescription());
-        product.setPrice(request.getPrice());
-        product.setCompareAtPrice(request.getCompareAtPrice());
+        product.setShortDesc(request.getShortDesc());
+        product.setBasePrice(request.getBasePrice());
+        product.setDiscountPct(request.getDiscountPct());
         product.setCategory(category);
-        product.setFeatured(request.isFeatured());
-        product.setActive(true);
-
-        if (request.getVariants() != null) {
-            List<ProductVariant> variants = request.getVariants().stream().map(v -> {
-                ProductVariant variant = new ProductVariant();
-                variant.setProduct(product);
-                variant.setSize(v.getSize());
-                variant.setColor(v.getColor());
-                variant.setSku(v.getSku());
-                variant.setPrice(v.getPrice());
-                variant.setStockQuantity(v.getStockQuantity());
-                return variant;
-            }).collect(Collectors.toList());
-            product.setVariants(variants);
-        }
-
-        if (request.getImages() != null) {
-            List<ProductImage> images = request.getImages().stream().map(img -> {
-                ProductImage image = new ProductImage();
-                image.setProduct(product);
-                image.setUrl(img.getUrl());
-                image.setAltText(img.getAltText());
-                image.setSortOrder(img.getSortOrder());
-                return image;
-            }).collect(Collectors.toList());
-            product.setImages(images);
-        }
+        product.setProductType(request.getProductType());
+        product.setIsFeatured(request.getIsFeatured() != null && request.getIsFeatured());
+        product.setIsActive(true);
+        product.setMetaTitle(request.getMetaTitle());
+        product.setMetaDesc(request.getMetaDesc());
 
         Product saved = productRepository.save(product);
         return mapToResponse(saved);
@@ -111,36 +87,14 @@ public class ProductService {
         product.setName(request.getName());
         product.setSlug(SlugGenerator.toSlug(request.getName()));
         product.setDescription(request.getDescription());
-        product.setPrice(request.getPrice());
-        product.setCompareAtPrice(request.getCompareAtPrice());
+        product.setShortDesc(request.getShortDesc());
+        product.setBasePrice(request.getBasePrice());
+        product.setDiscountPct(request.getDiscountPct());
         product.setCategory(category);
-        product.setFeatured(request.isFeatured());
-
-        if (request.getVariants() != null) {
-            product.getVariants().clear();
-            request.getVariants().forEach(v -> {
-                ProductVariant variant = new ProductVariant();
-                variant.setProduct(product);
-                variant.setSize(v.getSize());
-                variant.setColor(v.getColor());
-                variant.setSku(v.getSku());
-                variant.setPrice(v.getPrice());
-                variant.setStockQuantity(v.getStockQuantity());
-                product.getVariants().add(variant);
-            });
-        }
-
-        if (request.getImages() != null) {
-            product.getImages().clear();
-            request.getImages().forEach(img -> {
-                ProductImage image = new ProductImage();
-                image.setProduct(product);
-                image.setUrl(img.getUrl());
-                image.setAltText(img.getAltText());
-                image.setSortOrder(img.getSortOrder());
-                product.getImages().add(image);
-            });
-        }
+        product.setProductType(request.getProductType());
+        product.setIsFeatured(request.getIsFeatured() != null && request.getIsFeatured());
+        product.setMetaTitle(request.getMetaTitle());
+        product.setMetaDesc(request.getMetaDesc());
 
         Product saved = productRepository.save(product);
         return mapToResponse(saved);
@@ -154,19 +108,18 @@ public class ProductService {
     }
 
     private ProductResponse mapToResponse(Product product) {
-        Double avgRating = reviewRepository.findAverageRatingByProductId(product.getId());
-        Long reviewCount = reviewRepository.countByProductIdAndApprovedTrue(product.getId());
+        Double avgRating = reviewRepository.averageRatingByProductId(product.getId());
+        Long reviewCount = reviewRepository.countByProductIdAndIsApprovedTrue(product.getId());
 
         List<ProductResponse.VariantResponse> variantResponses = null;
         if (product.getVariants() != null) {
             variantResponses = product.getVariants().stream().map(v ->
                     ProductResponse.VariantResponse.builder()
                             .id(v.getId())
-                            .size(v.getSize())
-                            .color(v.getColor())
+                            .weightGrams(v.getWeightGrams())
                             .sku(v.getSku())
                             .price(v.getPrice())
-                            .stockQuantity(v.getStockQuantity())
+                            .stockQty(v.getStockQty())
                             .build()
             ).collect(Collectors.toList());
         }
@@ -176,9 +129,9 @@ public class ProductService {
             imageResponses = product.getImages().stream().map(img ->
                     ProductResponse.ImageResponse.builder()
                             .id(img.getId())
-                            .url(img.getUrl())
+                            .imageUrl(img.getImageUrl())
                             .altText(img.getAltText())
-                            .sortOrder(img.getSortOrder())
+                            .isPrimary(img.getIsPrimary())
                             .build()
             ).collect(Collectors.toList());
         }
@@ -188,18 +141,17 @@ public class ProductService {
                 .name(product.getName())
                 .slug(product.getSlug())
                 .description(product.getDescription())
-                .price(product.getPrice())
-                .compareAtPrice(product.getCompareAtPrice())
-                .categoryId(product.getCategory() != null ? product.getCategory().getId() : null)
+                .shortDesc(product.getShortDesc())
                 .categoryName(product.getCategory() != null ? product.getCategory().getName() : null)
-                .featured(product.isFeatured())
-                .active(product.isActive())
+                .categorySlug(product.getCategory() != null ? product.getCategory().getSlug() : null)
+                .productType(product.getProductType())
+                .basePrice(product.getBasePrice())
+                .discountPct(product.getDiscountPct())
+                .isFeatured(product.getIsFeatured())
                 .variants(variantResponses)
                 .images(imageResponses)
                 .avgRating(avgRating != null ? avgRating : 0.0)
                 .reviewCount(reviewCount != null ? reviewCount : 0L)
-                .createdAt(product.getCreatedAt())
-                .updatedAt(product.getUpdatedAt())
                 .build();
     }
 }

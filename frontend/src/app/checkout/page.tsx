@@ -233,7 +233,7 @@ export default function CheckoutPage() {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || '',
         amount: paymentData.amount,
         currency: paymentData.currency || 'INR',
-        name: 'FreezeDance',
+        name: 'FreezeDelights',
         description: `Order #${order.orderNumber}`,
         order_id: paymentData.razorpayOrderId,
         handler: async (response: RazorpayResponse) => {

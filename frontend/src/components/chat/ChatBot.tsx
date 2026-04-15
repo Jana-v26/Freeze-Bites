@@ -30,13 +30,13 @@ function getBotResponse(message: string): string {
     return 'We offer premium freeze-dried fruit cubes (Mango, Pineapple, Jamun, Banana, Jackfruit) and powders (Jamun, Mango, Pineapple, Moringa). All 100% natural with no preservatives!';
   }
   if (lower.includes('contact') || lower.includes('support') || lower.includes('reach') || lower.includes('call')) {
-    return 'You can reach us at support@freezedance.com or call +91-XXXXX-XXXXX. We\'re available Mon-Sat, 9AM-6PM IST.';
+    return 'You can reach us at support@freezedelights.in or call +91-XXXXX-XXXXX. We\'re available Mon-Sat, 9AM-6PM IST.';
   }
   if (lower.includes('return') || lower.includes('refund') || lower.includes('exchange')) {
     return 'We offer easy returns within 7 days of delivery. Items must be unopened and in original packaging.';
   }
   if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey') || lower.includes('good')) {
-    return 'Hello! Welcome to FreezeDance. How can I assist you today?';
+    return 'Hello! Welcome to FreezeDelights. How can I assist you today?';
   }
   if (lower.includes('price') || lower.includes('cost') || lower.includes('how much')) {
     return 'Our fruit cubes range from \u20B9199 to \u20B9319 (50g packs) and powders from \u20B9299 to \u20B9399 (100g packs). Check out our shop for combo deals!';
@@ -84,7 +84,7 @@ export default function ChatBot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'greeting',
-      text: "Hi! Welcome to FreezeDance. How can I help you today?",
+      text: "Hi! Welcome to FreezeDelights. How can I help you today?",
       sender: 'bot',
       timestamp: new Date(),
     },
@@ -174,7 +174,7 @@ export default function ChatBot() {
                   <Bot className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold text-sm">FreezeDance Support</h3>
+                  <h3 className="text-white font-semibold text-sm">FreezeDelights Support</h3>
                   <div className="flex items-center gap-1.5">
                     <span className="w-2 h-2 bg-green-400 rounded-full" />
                     <span className="text-white/60 text-xs">Online</span>

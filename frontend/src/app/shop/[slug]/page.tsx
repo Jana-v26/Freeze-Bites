@@ -355,7 +355,7 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-background)]" style={{ fontFamily: 'Inter, sans-serif' }}>
+    <div className="min-h-screen bg-[var(--color-fd-cream)] text-[var(--color-fd-text)]">
 
       {/* ═══ BREADCRUMB ═══ */}
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
@@ -363,175 +363,173 @@ export default function ProductDetailPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
-          className="flex items-center gap-2 text-sm text-[var(--color-on-surface-variant)]"
+          className="flex items-center gap-2 text-sm text-[var(--color-fd-text-muted)] font-bold"
         >
-          <Link href="/" className="hover:text-[var(--color-secondary)] transition-colors">Home</Link>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <Link href="/shop" className="hover:text-[var(--color-secondary)] transition-colors">Products</Link>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-[var(--color-foreground)] font-medium">{product.name}</span>
+          <Link href="/" className="hover:text-[var(--color-fd-green)] transition-colors">Home</Link>
+          <ChevronRight className="w-4 h-4" />
+          <Link href="/shop" className="hover:text-[var(--color-fd-green)] transition-colors">Products</Link>
+          <ChevronRight className="w-4 h-4" />
+          <span className="text-[var(--color-fd-green)]">{product.name}</span>
         </motion.div>
       </nav>
 
       {/* ═══ PRODUCT HERO ═══ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+        <div className="bg-white rounded-[3rem] p-6 sm:p-10 shadow-sm border-2 border-[var(--color-fd-green)]/10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
 
-          {/* Left: Product Image — 7 columns */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7"
-          >
-            <div className={`relative aspect-[4/5] ${product.bgTint} rounded-[3rem] overflow-hidden`}>
-              <Image
-                src={productImageURLs[product.slug]}
-                alt={product.name}
-                fill
-                unoptimized
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 58vw"
-                priority
-              />
+            {/* Left: Product Image — 6 columns */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-6"
+            >
+              <div className="relative aspect-[4/5] bg-[var(--color-fd-cream)] rounded-[2rem] overflow-hidden border-2 border-[var(--color-fd-green)]/5 flex items-center justify-center p-8">
+                {/* Sunburst background effect */}
+                <div className="absolute inset-0 opacity-20 pointer-events-none z-0" style={{ backgroundImage: 'repeating-conic-gradient(from 0deg, transparent 0deg 15deg, var(--color-fd-yellow) 15deg 30deg)' }} />
+                
+                <Image
+                  src={productImageURLs[product.slug]}
+                  alt={product.name}
+                  fill
+                  unoptimized
+                  className="object-contain drop-shadow-2xl z-10 p-12 hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
 
-              {/* Format badge — top right */}
-              <div className="absolute top-6 right-6 luxe-glass backdrop-blur-sm text-[var(--color-foreground)] text-xs font-semibold px-4 py-2 rounded-full shadow-sm">
-                {product.format}
+                <div className="absolute top-6 right-6 bg-white border-2 border-[var(--color-fd-green)]/20 text-[var(--color-fd-green)] text-xs font-black px-4 py-2 rounded-[1rem] shadow-sm z-20">
+                  {product.format}
+                </div>
               </div>
+            </motion.div>
 
-              {/* Export Grade badge — bottom left */}
-              <div className="absolute bottom-6 left-6 bg-[var(--color-primary)] text-[#064e3b] text-white text-xs font-semibold px-4 py-2 rounded-full shadow-sm">
-                Export Grade
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right: Product Info — 5 columns */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="lg:col-span-5 flex flex-col justify-center"
-          >
-            {/* 100% Natural badge */}
-            <span className="inline-flex items-center self-start bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20 text-[var(--color-primary)] text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
-              100% NATURAL
-            </span>
-
-            {/* Product name */}
-            <h1
-              className="text-4xl lg:text-5xl xl:text-7xl font-extrabold tracking-tighter text-[var(--color-foreground)] leading-[0.95] mb-4"
-                         >
-              {product.name.split(' ')[0]}{' '}
-              <span className="text-[var(--color-secondary)] italic">
-                {product.name.split(' ').slice(1).join(' ')}
+            {/* Right: Product Info — 6 columns */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="lg:col-span-6 flex flex-col justify-center"
+            >
+              {/* 100% Natural badge */}
+              <span className="inline-flex items-center self-start bg-[var(--color-fd-orange)] text-white text-xs font-black uppercase tracking-wider px-4 py-1.5 rounded-[1rem] mb-4 shadow-sm">
+                100% NATURAL
               </span>
-            </h1>
 
-            {/* Description */}
-            <p className="text-[var(--color-on-surface-variant)] leading-relaxed text-[15px] mb-6">
-              {product.description}
-            </p>
+              {/* Product name */}
+              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight text-[var(--color-fd-green)] leading-[1.0] mb-4 font-display">
+                {product.name}
+              </h1>
 
-            {/* Size Selector */}
-            <div className="mb-5">
-              <h3 className="text-xs font-semibold text-[var(--color-on-surface-variant)] uppercase tracking-wide mb-3">Select Size</h3>
-              <div className="flex gap-2.5">
-                {product.variants.map((variant, i) => (
-                  <button
-                    key={variant.id}
-                    onClick={() => { setSelectedVariant(i); setQuantity(1); }}
-                    className={`px-5 py-2.5 rounded-full text-sm font-medium border transition-all duration-200 ${
-                      selectedVariant === i
-                        ? 'bg-[var(--color-secondary)] text-white border-[var(--color-secondary)]'
-                        : 'luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)] text-[var(--color-foreground)] border-[var(--color-outline-variant)] hover:border-[var(--color-secondary)]/40'
-                    }`}
-                  >
-                    {variant.weight}
-                    {selectedVariant === i && (
-                      <span className="ml-2 font-bold">{'\u20B9'}{variant.price}</span>
+              {/* Description */}
+              <p className="text-[var(--color-fd-text-muted)] leading-relaxed text-[15px] font-medium mb-8">
+                {product.description}
+              </p>
+
+              {/* Size Selector */}
+              <div className="mb-6">
+                <h3 className="text-xs font-black text-[var(--color-fd-green)] uppercase tracking-wide mb-3">Select Size</h3>
+                <div className="flex flex-wrap gap-2.5">
+                  {product.variants.map((variant, i) => (
+                    <button
+                      key={variant.id}
+                      onClick={() => { setSelectedVariant(i); setQuantity(1); }}
+                      className={`px-6 py-3 rounded-[1rem] text-sm font-bold border-2 transition-all duration-200 shadow-sm ${
+                        selectedVariant === i
+                          ? 'bg-[var(--color-fd-green)] text-white border-[var(--color-fd-green)]'
+                          : 'bg-white text-[var(--color-fd-green)] border-[var(--color-fd-green)]/20 hover:border-[var(--color-fd-green)]'
+                      }`}
+                    >
+                      {variant.weight}
+                      {selectedVariant === i && (
+                        <span className="ml-2 font-black text-[var(--color-fd-yellow)]">{'\u20B9'}{variant.price}</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-6 mb-8 mt-2 items-start sm:items-end">
+                {/* Quantity Selector */}
+                <div>
+                  <h3 className="text-xs font-black text-[var(--color-fd-green)] uppercase tracking-wide mb-3">Quantity</h3>
+                  <div className="inline-flex items-center bg-white border-2 border-[var(--color-fd-green)]/20 rounded-[1rem] p-1 shadow-sm">
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="w-10 h-10 flex items-center justify-center text-[var(--color-fd-green)] hover:bg-[var(--color-fd-cream)] rounded-[0.5rem] transition-colors"
+                    >
+                      <Minus className="w-5 h-5" />
+                    </button>
+                    <span className="w-12 text-center font-black text-[var(--color-fd-green)]">{quantity}</span>
+                    <button
+                      onClick={() => setQuantity(Math.min(10, quantity + 1))}
+                      className="w-10 h-10 flex items-center justify-center text-[var(--color-fd-green)] hover:bg-[var(--color-fd-cream)] rounded-[0.5rem] transition-colors"
+                    >
+                      <Plus className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Price display */}
+                <div className="flex flex-col">
+                  <div className="flex items-baseline gap-3 mb-2">
+                    <span className="text-4xl font-black text-[var(--color-fd-green)] font-display">
+                      {'\u20B9'}{currentVariant.price * quantity}
+                    </span>
+                    {currentVariant.compareAtPrice && (
+                      <span className="text-lg text-[var(--color-fd-orange)] font-bold line-through">
+                        {'\u20B9'}{currentVariant.compareAtPrice * quantity}
+                      </span>
                     )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <motion.button
+                  whileTap={{ scale: 0.97 }}
+                  onClick={handleAddToCart}
+                  disabled={isAddingToCart}
+                  className="flex-1 bg-[var(--color-fd-lime)] text-[var(--color-fd-green)] border-2 border-[var(--color-fd-green)] font-black py-4 rounded-[1.5rem] text-[15px] hover:bg-[var(--color-fd-yellow)] transition-colors shadow-md disabled:opacity-70 flex justify-center items-center"
+                >
+                  <AnimatePresence mode="wait">
+                    {isAddingToCart ? (
+                      <motion.span key="adding" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        Adding...
+                      </motion.span>
+                    ) : (
+                      <motion.span key="add" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        Add to Cart
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
+                <Link href="/checkout" className="flex-1">
+                  <button className="w-full bg-[var(--color-fd-green)] text-white border-2 border-[var(--color-fd-green)] font-black py-4 rounded-[1.5rem] text-[15px] hover:bg-[var(--color-fd-lime)] hover:text-[var(--color-fd-green)] transition-colors shadow-md">
+                    Buy Now
                   </button>
-                ))}
+                </Link>
               </div>
-            </div>
 
-            {/* Quantity Selector */}
-            <div className="mb-6">
-              <h3 className="text-xs font-semibold text-[var(--color-on-surface-variant)] uppercase tracking-wide mb-3">Quantity</h3>
-              <div className="inline-flex items-center luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)] border border-[var(--color-outline-variant)] rounded-full">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 flex items-center justify-center text-[var(--color-on-surface-variant)] hover:text-[var(--color-foreground)] transition-colors"
-                >
-                  <Minus className="w-4 h-4" />
-                </button>
-                <span className="w-10 text-center font-semibold text-sm text-[var(--color-foreground)]">{quantity}</span>
-                <button
-                  onClick={() => setQuantity(Math.min(10, quantity + 1))}
-                  className="w-10 h-10 flex items-center justify-center text-[var(--color-on-surface-variant)] hover:text-[var(--color-foreground)] transition-colors"
-                >
-                  <Plus className="w-4 h-4" />
-                </button>
+              {/* Specs Row: 3 columns */}
+              <div className="grid grid-cols-3 gap-3">
+                <div className="bg-[var(--color-fd-cream)] border-2 border-[var(--color-fd-green)]/10 rounded-[1.5rem] p-3 text-center transition-colors hover:border-[var(--color-fd-green)]/20">
+                  <p className="text-[10px] text-[var(--color-fd-text-muted)] font-black uppercase tracking-wider mb-1">Weight</p>
+                  <p className="text-[13px] font-bold text-[var(--color-fd-green)]">{currentVariant.weight}</p>
+                </div>
+                <div className="bg-[var(--color-fd-cream)] border-2 border-[var(--color-fd-green)]/10 rounded-[1.5rem] p-3 text-center transition-colors hover:border-[var(--color-fd-green)]/20">
+                  <p className="text-[10px] text-[var(--color-fd-text-muted)] font-black uppercase tracking-wider mb-1">Shelf Life</p>
+                  <p className="text-[13px] font-bold text-[var(--color-fd-green)]">{product.specs.shelfLife}</p>
+                </div>
+                <div className="bg-[var(--color-fd-cream)] border-2 border-[var(--color-fd-green)]/10 rounded-[1.5rem] p-3 text-center transition-colors hover:border-[var(--color-fd-green)]/20">
+                  <p className="text-[10px] text-[var(--color-fd-text-muted)] font-black uppercase tracking-wider mb-1">Certified</p>
+                  <p className="text-[13px] font-bold text-[var(--color-fd-green)]">FSSAI</p>
+                </div>
               </div>
-            </div>
-
-            {/* Price display */}
-            <div className="flex items-baseline gap-3 mb-6">
-              <span className="text-3xl font-extrabold text-[var(--color-secondary)]" style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
-                {'\u20B9'}{currentVariant.price * quantity}
-              </span>
-              {currentVariant.compareAtPrice && (
-                <span className="text-lg text-[var(--color-on-surface-variant)] opacity-50 line-through">
-                  {'\u20B9'}{currentVariant.compareAtPrice * quantity}
-                </span>
-              )}
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex gap-3 mb-8">
-              <motion.button
-                whileTap={{ scale: 0.97 }}
-                onClick={handleAddToCart}
-                disabled={isAddingToCart}
-                className="flex-1 btn-primary !py-4 text-sm disabled:opacity-70"
-              >
-                <AnimatePresence mode="wait">
-                  {isAddingToCart ? (
-                    <motion.span key="adding" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                      Adding...
-                    </motion.span>
-                  ) : (
-                    <motion.span key="add" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                      Add to Cart
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.button>
-              <Link href="/checkout" className="flex-1">
-                <button className="w-full btn-secondary !py-4 text-sm">
-                  Buy Now
-                </button>
-              </Link>
-            </div>
-
-            {/* Specs Row: 3 columns */}
-            <div className="grid grid-cols-3 gap-4">
-              <div className="luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)]/5 border border-white/10 rounded-2xl p-4 text-center">
-                <p className="text-xs text-[var(--color-on-surface-variant)] font-medium mb-1">Weight</p>
-                <p className="text-sm font-bold text-[var(--color-foreground)]">{currentVariant.weight}</p>
-              </div>
-              <div className="luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)]/5 border border-white/10 rounded-2xl p-4 text-center">
-                <p className="text-xs text-[var(--color-on-surface-variant)] font-medium mb-1">Shelf Life</p>
-                <p className="text-sm font-bold text-[var(--color-foreground)]">{product.specs.shelfLife}</p>
-              </div>
-              <div className="luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)]/5 border border-white/10 rounded-2xl p-4 text-center">
-                <p className="text-xs text-[var(--color-on-surface-variant)] font-medium mb-1">Certified</p>
-                <p className="text-sm font-bold text-[var(--color-foreground)]">FSSAI</p>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -541,30 +539,28 @@ export default function ProductDetailPage() {
         initial={{ opacity: 0, y: 40 }}
         animate={nutritionInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="py-16 px-4 sm:px-6 lg:px-8"
+        className="py-16 px-4 sm:px-6 lg:px-8 bg-white border-t-2 border-b-2 border-[var(--color-fd-green)]/5"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Nutrition table */}
-            <div className="luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)] rounded-[2rem] p-8 md:p-10 shadow-sm">
-              <h2
-                className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--color-foreground)] mb-2"
-                             >
-                Nutritional Information
+            <div className="bg-[var(--color-fd-cream)] border-2 border-[var(--color-fd-green)]/10 rounded-[2rem] p-8 md:p-10 shadow-sm border-t-[12px] border-t-[var(--color-fd-green)]">
+              <h2 className="text-2xl md:text-3xl font-black tracking-tight text-[var(--color-fd-green)] mb-2 font-display">
+                Nutritional Profile
               </h2>
-              <p className="text-sm text-[var(--color-on-surface-variant)] mb-6">Per 50g serving</p>
+              <p className="text-sm font-bold text-[var(--color-fd-text-muted)] mb-6 uppercase tracking-wider">Per 50g serving</p>
 
-              <div className="divide-y divide-[var(--color-outline-variant)]">
+              <div className="divide-y-2 divide-[var(--color-fd-green)]/10">
                 {product.nutrition.map((row, i) => (
                   <motion.div
                     key={row.label}
                     initial={{ opacity: 0, x: -20 }}
                     animate={nutritionInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.4, delay: i * 0.06 }}
-                    className="flex items-center justify-between py-3.5"
+                    className="flex items-center justify-between py-4"
                   >
-                    <span className="text-sm text-[var(--color-on-surface-variant)]">{row.label}</span>
-                    <span className="text-sm font-semibold text-[var(--color-foreground)]">{row.value}</span>
+                    <span className="text-sm font-bold text-[var(--color-fd-text-muted)]">{row.label}</span>
+                    <span className="text-sm font-black text-[var(--color-fd-green)]">{row.value}</span>
                   </motion.div>
                 ))}
               </div>
@@ -572,25 +568,23 @@ export default function ProductDetailPage() {
 
             {/* Health benefits grid */}
             <div>
-              <h2
-                className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--color-foreground)] mb-6"
-                             >
-                Health Benefits
+              <h2 className="text-2xl md:text-3xl font-black tracking-tight text-[var(--color-fd-green)] mb-8 font-display">
+                Why It&apos;s Super
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {product.benefits.map((benefit, i) => (
                   <motion.div
                     key={benefit.title}
                     initial={{ opacity: 0, y: 20 }}
                     animate={nutritionInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)] rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow duration-300"
+                    className="bg-white border-2 border-[var(--color-fd-green)]/10 rounded-[1.5rem] p-6 shadow-sm hover:border-[var(--color-fd-green)]/30 hover:shadow-md transition-all duration-300"
                   >
-                    <div className="w-10 h-10 bg-[var(--color-secondary)]/10 border border-[var(--color-secondary)]/20 rounded-xl flex items-center justify-center mb-3">
-                      <benefit.icon className="w-5 h-5 text-[var(--color-secondary)]" />
+                    <div className="w-12 h-12 bg-[var(--color-fd-lime)] rounded-full flex items-center justify-center mb-4 border border-[var(--color-fd-green)]/20">
+                      <benefit.icon className="w-6 h-6 text-[var(--color-fd-green)]" />
                     </div>
-                    <h3 className="text-sm font-bold text-[var(--color-foreground)] mb-1">{benefit.title}</h3>
-                    <p className="text-xs text-[var(--color-on-surface-variant)] leading-relaxed">{benefit.desc}</p>
+                    <h3 className="text-[15px] font-black text-[var(--color-fd-green)] mb-2">{benefit.title}</h3>
+                    <p className="text-sm font-medium text-[var(--color-fd-text-muted)] leading-relaxed">{benefit.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -599,28 +593,26 @@ export default function ProductDetailPage() {
         </div>
       </motion.section>
 
-      {/* ═══ RELATED PRODUCTS — "Expand Your Portfolio" ═══ */}
+      {/* ═══ RELATED PRODUCTS ═══ */}
       <motion.section
         ref={relatedRef}
         initial={{ opacity: 0, y: 40 }}
         animate={relatedInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="py-16 pb-24 px-4 sm:px-6 lg:px-8"
+        className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--color-fd-cream)]"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
             <div>
-              <p className="text-xs font-semibold tracking-widest uppercase text-[var(--color-secondary)] mb-2">
+              <p className="text-xs font-black tracking-widest uppercase text-[var(--color-fd-orange)] mb-2">
                 DISCOVER MORE
               </p>
-              <h2
-                className="text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--color-foreground)]"
-                             >
+              <h2 className="text-3xl md:text-4xl font-black tracking-tight text-[var(--color-fd-green)] font-display">
                 Expand Your Portfolio
               </h2>
             </div>
             <Link href="/shop" className="mt-4 md:mt-0">
-              <span className="text-[var(--color-secondary)] font-semibold text-sm flex items-center gap-1.5 hover:underline">
+              <span className="text-[var(--color-fd-green)] font-bold text-sm flex items-center gap-1.5 hover:underline decoration-2 underline-offset-4">
                 View all products <ArrowRight className="w-4 h-4" />
               </span>
             </Link>
@@ -635,32 +627,30 @@ export default function ProductDetailPage() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <Link href={`/shop/${rp.slug}`}>
-                  <div className="group h-[420px] rounded-xl luxe-glass text-[var(--color-foreground)] border border-[var(--color-outline-variant)]/5 border border-white/10 overflow-hidden cursor-pointer">
+                  <div className="group bg-white h-[420px] rounded-[2rem] border-2 border-[var(--color-fd-green)]/10 overflow-hidden cursor-pointer shadow-sm hover:shadow-xl hover:border-[var(--color-fd-green)]/30 transition-all duration-300 flex flex-col">
                     {/* Image */}
-                    <div className={`relative h-[60%] ${rp.bgTint} overflow-hidden`}>
+                    <div className="relative flex-1 bg-[var(--color-fd-cream)] overflow-hidden flex items-center justify-center p-6 border-b-2 border-[var(--color-fd-green)]/10">
                       <Image
                         src={productImageURLs[rp.slug]}
                         alt={rp.name}
                         fill
                         unoptimized
-                        className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                        className="object-contain p-8 group-hover:scale-110 transition-transform duration-500 ease-out drop-shadow-xl"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     </div>
                     {/* Info */}
-                    <div className="p-5">
-                      <p className="text-xs font-medium text-[var(--color-on-surface-variant)] tracking-wide uppercase mb-1">
+                    <div className="p-6">
+                      <p className="text-[10px] font-black text-[var(--color-fd-text-muted)] tracking-widest uppercase mb-1">
                         {rp.category}
                       </p>
-                      <h3
-                        className="text-xl font-bold text-[var(--color-foreground)] mb-2"
-                                             >
+                      <h3 className="text-xl font-black text-[var(--color-fd-green)] mb-4 leading-tight">
                         {rp.name}
                       </h3>
                       <div className="flex items-center justify-between">
-                        <span className="text-lg font-bold text-[var(--color-secondary)]">{'\u20B9'}{rp.price}</span>
-                        <span className="text-sm font-semibold text-[var(--color-secondary)] flex items-center gap-1 group-hover:underline">
-                          View <ArrowRight className="w-3.5 h-3.5" />
+                        <span className="text-xl font-black text-[var(--color-fd-green)]">{'\u20B9'}{rp.price}</span>
+                        <span className="bg-[var(--color-fd-green)] text-white w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-[var(--color-fd-lime)] group-hover:text-[var(--color-fd-green)] transition-colors shadow-sm">
+                          <ArrowRight className="w-5 h-5" />
                         </span>
                       </div>
                     </div>
