@@ -9,66 +9,65 @@ import { productImages } from '@/lib/images';
 // ─── Product category cards ───────────────────────────────────────────────
 const categories = [
   {
-    name: 'Pure Freeze-Dried\nMango Cubes',
-    href: '/shop/mango-cubes',
-    bg: 'var(--color-cat-teal)', // Teal arch
-    image: productImages['mango-cubes'].main,
-    alt: 'Mango Cubes',
+    name: 'Antioxidant Rich\nJamun Cubes',
+    href: '/shop/jamun-pouch',
+    bg: '#5D348B', // Deep Purple
+    image: productImages['jamun-pouch'].main,
+    alt: 'Jamun Pouch',
   },
   {
-    name: 'Tropical\nFruit Blends',
-    href: '/shop?category=blends',
-    bg: 'var(--color-cat-pink)', // Pink arch
-    image: productImages['pineapple-cubes'].main, // Placeholder for blend
-    alt: 'Fruit Blends',
+    name: 'Potassium Packed\nBanana Slices',
+    href: '/shop/banana-pouch',
+    bg: '#FFD700', // Gold/Yellow
+    image: productImages['banana-pouch'].main,
+    alt: 'Banana Pouch',
   },
   {
-    name: 'Organic Superfood\nPowders',
-    href: '/shop/moringa-powder',
-    bg: 'var(--color-cat-blue)', // Blue arch
-    image: productImages['moringa-powder'].main,
-    alt: 'Moringa Powder',
+    name: 'Pure Organic\nMoringa Powder',
+    href: '/shop/moringa-pouch',
+    bg: '#0F5E3E', // Forest Green
+    image: productImages['moringa-pouch'].main,
+    alt: 'Moringa Pouch',
   },
   {
-    name: 'Superfood\nAntioxidant Bites',
-    href: '/shop/jamun-cubes',
-    bg: 'var(--color-cat-berry)', // Berry arch
-    image: productImages['jamun-cubes'].main,
-    alt: 'Jamun Bites',
-  },
-];
-
-// ─── Pillar cards (Organic layout) ─────────────────────────────────────────
-const pillars = [
-  {
-    title: 'Scientifically Super',
-    desc: 'Our superfood plants are nutritional powerhouses that are packed with potent nutrients and scientifically-proven efficacy.',
-    image: '/images/products/moringa-powder.png', // Needs a raw leaf image ideally
-    alt: 'Moringa Leaf',
-    bg: '#5ab2a1', // Teal semi-circle
-  },
-  {
-    title: 'Climate Smart',
-    desc: "Our fruits are grown with a focus on regenerative agriculture and are sustainably sourced from our worldwide partners.",
-    image: '/images/products/mango-cubes.png', // Needs a raw pod/fruit image
-    alt: 'Raw Fruit',
-    bg: '#c5d836', // Lime semi-circle
-  },
-  {
-    title: 'Community Grown',
-    desc: 'Working with growers in small communities builds brighter futures through equitable trade, collaboration, and impactful growth.',
-    image: '/images/products/jamun-cubes.png', // Needs a farmer/community image
-    alt: 'Community Farmer',
-    bg: '#eb5a2f', // Orange semi-circle
+    name: 'Vitamin-Dense\nMango Cubes',
+    href: '/shop/mango-pouch',
+    bg: '#FF8C00', // Vibrant Orange
+    image: productImages['mango-pouch'].main,
+    alt: 'Mango Pouch',
   },
 ];
 
 // ─── Ingredient marquee items ──────────────────────────────────────────────
 const ingredients = [
-  'MANGO', 'PINEAPPLE', 'JACKFRUIT', 'JAMUN', 'BANANA',
-  'MORINGA', 'WATERMELON', 'LEMON', 'SPIRULINA', 'GINGER',
+  'MANGO', 'BANANA', 'GUAVA', 'JAMUN', 'MORINGA',
 ];
-const marqueeItems = [...ingredients, ...ingredients];
+const marqueeItems = [...ingredients, ...ingredients, ...ingredients];
+
+// ─── Pillar cards (Organic layout) ─────────────────────────────────────────
+const pillars = [
+  {
+    title: 'Vitamin Dense',
+    desc: 'Our Mango and Guava segments are cold-sublimated at peak ripeness to preserve 98% of Vitamin C and Lycopene density.',
+    image: '/images/products/mango-pouch.png',
+    alt: 'Mango Pouch',
+    bg: '#FF8C00', // Mango Orange
+  },
+  {
+    title: 'Fiber Excellence',
+    desc: "Meelar Banana slices provide a concentrated source of pre-biotic fiber, supporting gut health with zero added sugars.",
+    image: '/images/products/banana-pouch.png',
+    alt: 'Banana Pouch',
+    bg: '#ffd700', // Banana Yellow
+  },
+  {
+    title: 'Iron Power',
+    desc: 'Our Moringa is exceptionally rich in Iron and contains 9 essential amino acids, making it a complete plant-based protein.',
+    image: '/images/products/moringa-pouch.png',
+    alt: 'Moringa Pouch',
+    bg: '#0F5E3E', // Moringa Green
+  },
+];
 
 // ─── Email signup block ──────────────────────────────────────────────────
 function EmailSignup() {
@@ -137,9 +136,12 @@ export default function HomePage() {
         <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 pattern-side-circles opacity-60 mix-blend-multiply pointer-events-none" />
         
         <div className="relative z-10 max-w-5xl mx-auto">
-          <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl text-[var(--color-fd-green)] mb-8 tracking-tight">
-            Introducing Our Newest Products
-          </h1>
+          <div className="flex flex-col items-center mb-8">
+            <img src="/images/logo.png" alt="Meelar" className="h-16 w-auto mb-6 brightness-0 opacity-80" />
+            <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl text-[var(--color-fd-green)] tracking-tight">
+              Nature&apos;s Zenith, Sealed.
+            </h1>
+          </div>
           <Link
             href="/shop"
             className="inline-block bg-white text-[var(--color-fd-green)] font-black px-10 py-4 rounded-full text-sm hover:scale-105 transition-transform shadow-md"
@@ -158,29 +160,29 @@ export default function HomePage() {
                <div className="w-full h-full bg-[var(--color-fd-lime)] rounded-full blur-[50px] mix-blend-overlay" />
             </div>
 
-            {/* Product 1: Far left */}
+            {/* Product 1: Jamun */}
             <div className="relative w-24 sm:w-40 lg:w-56 aspect-[3/4] z-10 origin-bottom opacity-90">
-               <Image src={productImages['pineapple-cubes'].main} alt="Pineapple Cubes" fill className="object-contain drop-shadow-xl object-bottom" unoptimized/>
+               <Image src={productImages['jamun-pouch'].main} alt="Jamun Pouch" fill className="object-contain drop-shadow-xl object-bottom" unoptimized/>
             </div>
             
-            {/* Product 2: Middle left */}
+            {/* Product 2: Banana */}
             <div className="relative w-24 sm:w-40 lg:w-56 aspect-[3/4] z-20 origin-bottom">
-               <Image src={productImages['mango-cubes'].main} alt="Mango Cubes" fill className="object-contain drop-shadow-2xl object-bottom" unoptimized/>
+               <Image src={productImages['banana-pouch'].main} alt="Banana Pouch" fill className="object-contain drop-shadow-2xl object-bottom" unoptimized/>
             </div>
             
-            {/* Product 3: Center Front */}
+            {/* Product 3: Mango (Center) */}
             <div className="relative w-24 sm:w-40 lg:w-56 aspect-[3/4] z-30 origin-bottom">
-               <Image src={productImages['moringa-powder'].main} alt="Moringa Powder" fill className="object-contain drop-shadow-2xl object-bottom" unoptimized/>
+               <Image src={productImages['mango-pouch'].main} alt="Mango Pouch" fill className="object-contain drop-shadow-2xl object-bottom" unoptimized/>
             </div>
             
-            {/* Product 4: Middle Right */}
+            {/* Product 4: Guava */}
             <div className="relative w-24 sm:w-40 lg:w-56 aspect-[3/4] z-20 origin-bottom">
-               <Image src={productImages['jamun-cubes'].main} alt="Jamun Cubes" fill className="object-contain drop-shadow-2xl object-bottom" unoptimized/>
+               <Image src={productImages['guava-pouch'].main} alt="Guava Pouch" fill className="object-contain drop-shadow-2xl object-bottom" unoptimized/>
             </div>
             
-            {/* Product 5: Far Right */}
+            {/* Product 5: Moringa */}
             <div className="relative w-24 sm:w-40 lg:w-56 aspect-[3/4] z-10 origin-bottom opacity-90">
-               <Image src={productImages['pineapple-powder'].main} alt="Pineapple Powder" fill className="object-contain drop-shadow-xl object-bottom" unoptimized/>
+               <Image src={productImages['moringa-pouch'].main} alt="Moringa Pouch" fill className="object-contain drop-shadow-xl object-bottom" unoptimized/>
             </div>
           </div>
         </div>

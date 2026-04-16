@@ -36,11 +36,7 @@ export default function Footer() {
         {/* Logo — spans full width on mobile */}
         <div className="col-span-2 md:col-span-1 flex items-start">
           <Link href="/">
-            <span className="font-display font-extrabold text-4xl tracking-tight leading-none">
-              <span className="text-[#C8D94C]">Freeze</span>
-              <br />
-              <span className="text-white">Delights</span>
-            </span>
+            <img src="/images/logo.png" alt="Meelar Logo" className="h-16 w-auto brightness-0 invert" />
           </Link>
         </div>
 
@@ -56,7 +52,7 @@ export default function Footer() {
                   href={l.href}
                   className="text-white/80 hover:text-white text-sm transition-colors"
                 >
-                  {l.name}
+                  {l.name === 'FreezeDelights Merch' ? 'Meelar Merch' : l.name}
                 </Link>
               </li>
             ))}
@@ -145,7 +141,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-white/60">
-          <p>Copyright &copy; 2026 <Link href="/" className="underline underline-offset-2 hover:text-white transition-colors">FreezeDelights</Link>. All rights reserved.</p>
+          <p>Copyright &copy; 2026 <Link href="/" className="underline underline-offset-2 hover:text-white transition-colors">Meelar Foods</Link>. All rights reserved.</p>
           <p>Made in India 🇮🇳</p>
         </div>
       </div>

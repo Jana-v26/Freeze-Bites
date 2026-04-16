@@ -17,35 +17,34 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "FreezeDelights | Premium Freeze-Dried Fruits & Powders",
+  title: "Meelar | Premium Matte Superfood Pouches",
   description:
-    "India's finest freeze-dried fruits and superfood powders. 100% natural, no preservatives — all the flavour, all the nutrition.",
+    "Industrial standard premium freeze-dried segments and powders. 100% natural, no preservatives — Meelar delivers the zenith of nutrition.",
   keywords: [
-    "freeze dried fruits",
-    "fruit powder",
-    "mango",
-    "pineapple",
+    "meelar",
+    "freeze dried fruit",
     "jamun",
     "banana",
-    "jackfruit",
+    "mango",
+    "guava",
     "moringa",
-    "freeze delights",
+    "matte packaging",
   ],
-  authors: [{ name: "FreezeDelights Team" }],
+  authors: [{ name: "Meelar Team" }],
   openGraph: {
-    title: "FreezeDelights | Premium Freeze-Dried Fruits & Powders",
+    title: "Meelar | Premium Matte Superfood Pouches",
     description:
-      "India's finest freeze-dried fruits and superfood powders. 100% natural, no preservatives.",
-    url: "https://freezedelights.in",
-    siteName: "FreezeDelights",
+      "Industrial standard premium freeze-dried segments and powders. 100% natural, no preservatives.",
+    url: "https://meelar.in",
+    siteName: "Meelar",
     locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "FreezeDelights | Premium Freeze-Dried Fruits & Powders",
+    title: "Meelar | Premium Matte Superfood Pouches",
     description:
-      "India's finest freeze-dried fruits and superfood powders. 100% natural, no preservatives.",
+      "Industrial standard premium freeze-dried segments and powders. 100% natural, no preservatives.",
   },
   robots: { index: true, follow: true },
 };
