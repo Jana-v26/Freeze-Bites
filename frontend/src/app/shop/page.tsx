@@ -8,70 +8,42 @@ import { productImages } from '@/lib/images';
 
 const sculptureProducts = [
   {
-    name: 'Mango Cubes',
-    subtitle: 'Golden premium cubes',
-    price: '₹249',
-    slug: 'mango-cubes',
-    image: productImages['mango-cubes'].main,
-  },
-  {
-    name: 'Pineapple Cubes',
-    subtitle: 'Tropical tangy bites',
-    price: '₹279',
-    slug: 'pineapple-cubes',
-    image: productImages['pineapple-cubes'].main,
-  },
-  {
-    name: 'Jackfruit Cubes',
-    subtitle: 'Exotic sweetness',
-    price: '₹319',
-    slug: 'jackfruit-cubes',
-    image: productImages['jackfruit-cubes'].main,
-  },
-  {
-    name: 'Jamun Bites',
-    subtitle: 'Exotic antioxidants',
+    name: 'Jamun Pouch',
+    subtitle: 'Antioxidant treasure',
     price: '₹299',
-    slug: 'jamun-cubes',
-    image: productImages['jamun-cubes'].main,
+    slug: 'jamun-pouch',
+    image: productImages['jamun-pouch'].main,
   },
   {
-    name: 'Banana Slices',
-    subtitle: 'Delicate crunch',
+    name: 'Banana Pouch',
+    subtitle: 'Potassium powerhouse',
     price: '₹199',
-    slug: 'banana-cubes',
-    image: productImages['banana-cubes'].main,
+    slug: 'banana-pouch',
+    image: productImages['banana-pouch'].main,
+  },
+  {
+    name: 'Mango Pouch',
+    subtitle: 'Golden vitamin-c',
+    price: '₹249',
+    slug: 'mango-pouch',
+    image: productImages['mango-pouch'].main,
+  },
+  {
+    name: 'Pink Guava Pouch',
+    subtitle: 'Lycopene superior',
+    price: '₹269',
+    slug: 'guava-pouch',
+    image: productImages['guava-pouch'].main,
   },
 ];
 
 const vitalityProducts = [
   {
-    name: 'Super Moringa',
-    subtitle: 'Green life force',
+    name: 'Moringa Pouch',
+    subtitle: 'Iron density green',
     price: '₹399',
-    slug: 'moringa-powder',
-    image: productImages['moringa-powder'].main,
-  },
-  {
-    name: 'Watermelon Splash',
-    subtitle: 'Hydrating base',
-    price: '₹449',
-    slug: 'watermelon-powder',
-    image: productImages['watermelon-powder'].main,
-  },
-  {
-    name: 'Zesty Lemon',
-    subtitle: 'Citrus essence',
-    price: '₹349',
-    slug: 'lemon-powder',
-    image: productImages['lemon-powder'].main,
-  },
-  {
-    name: 'Pineapple Powder',
-    subtitle: 'Tropical boost',
-    price: '₹299',
-    slug: 'pineapple-powder',
-    image: productImages['pineapple-powder'].main,
+    slug: 'moringa-pouch',
+    image: productImages['moringa-pouch'].main,
   },
 ];
 

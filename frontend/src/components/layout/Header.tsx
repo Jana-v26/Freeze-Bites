@@ -44,10 +44,12 @@ export default function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <span className="font-display font-extrabold text-2xl tracking-tight leading-none">
-              <span className="text-[#C8D94C]">Freeze</span>
-              <span className="text-white">Delights</span>
-            </span>
+            <div className="flex items-center gap-2">
+              <img src="/images/logo.png" alt="Meelar Logo" className="h-10 w-auto brightness-0 invert" />
+              <span className="font-display font-extrabold text-2xl tracking-tight leading-none text-white lg:hidden">
+                Meelar
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
