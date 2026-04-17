@@ -30,11 +30,11 @@ public class ProductController {
         if (search != null && !search.isBlank()) {
             products = productService.searchProducts(search, pageable);
         } else if (category != null && !category.isBlank()) {
-            products = productService.getByCategory(category, pageable);
+            products = productService.getProductsByCategory(category, pageable);
         } else if (type != null && !type.isBlank()) {
-            products = productService.getByType(type, pageable);
+            products = productService.getProductsByType(type, pageable);
         } else {
-            products = productService.getAll(pageable);
+            products = productService.getAllProducts(pageable);
         }
 
         return ResponseEntity.ok(ApiResponse.success(products));
@@ -42,7 +42,7 @@ public class ProductController {
 
     @GetMapping("/{slug}")
     public ResponseEntity<ApiResponse<ProductResponse>> getProduct(@PathVariable String slug) {
-        ProductResponse product = productService.getBySlug(slug);
+        ProductResponse product = productService.getProductBySlug(slug);
         return ResponseEntity.ok(ApiResponse.success(product));
     }
 

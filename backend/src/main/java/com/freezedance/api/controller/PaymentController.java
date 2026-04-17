@@ -1,11 +1,12 @@
 package com.freezedance.api.controller;
 
 import com.freezedance.api.dto.response.ApiResponse;
-import com.freezedance.api.dto.response.PaymentResponse;
 import com.freezedance.api.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/payments")
@@ -15,8 +16,8 @@ public class PaymentController {
     private final PaymentService paymentService;
 
     @PostMapping("/create-order")
-    public ResponseEntity<ApiResponse<PaymentResponse>> createOrder(@RequestParam String orderNumber) {
-        PaymentResponse response = paymentService.createRazorpayOrder(orderNumber);
+    public ResponseEntity<ApiResponse<Map<String, Object>>> createOrder(@RequestParam String orderNumber) {
+        Map<String, Object> response = paymentService.createRazorpayOrder(orderNumber);
         return ResponseEntity.ok(ApiResponse.success(response));
     }
 

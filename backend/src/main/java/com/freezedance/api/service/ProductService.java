@@ -7,6 +7,7 @@ import com.freezedance.api.model.Category;
 import com.freezedance.api.model.Product;
 import com.freezedance.api.model.ProductImage;
 import com.freezedance.api.model.ProductVariant;
+import com.freezedance.api.model.enums.ProductType;
 import com.freezedance.api.repository.CategoryRepository;
 import com.freezedance.api.repository.ProductRepository;
 import com.freezedance.api.repository.ReviewRepository;
@@ -46,6 +47,11 @@ public class ProductService {
 
     public Page<ProductResponse> getProductsByCategory(String categorySlug, Pageable pageable) {
         return productRepository.findByCategorySlugAndIsActiveTrue(categorySlug, pageable).map(this::mapToResponse);
+    }
+
+    public Page<ProductResponse> getProductsByType(String type, Pageable pageable) {
+        ProductType productType = ProductType.valueOf(type.toUpperCase());
+        return productRepository.findByProductTypeAndIsActiveTrue(productType, pageable).map(this::mapToResponse);
     }
 
     public Page<ProductResponse> searchProducts(String query, Pageable pageable) {
