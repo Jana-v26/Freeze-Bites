@@ -6,7 +6,7 @@ COPY mvnw pom.xml ./
 RUN chmod +x mvnw && ./mvnw dependency:resolve -B -q
 
 COPY src/ src/
-RUN ./mvnw -DskipTests clean package -B -q
+RUN ./mvnw -DskipTests clean package -B
 
 FROM eclipse-temurin:17-jre
 WORKDIR /app
